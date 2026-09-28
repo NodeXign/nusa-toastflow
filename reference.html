@@ -49,6 +49,13 @@ p.lead{color:var(--muted);font-size:17.5px;max-width:840px;line-height:1.6;margi
 .step-card h3{font-size:19px;margin-bottom:8px}
 .step-card p{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
 .step-card .tip{margin-top:12px;padding:9px 12px;border-radius:10px;background:var(--cream);font-size:13.5px;color:var(--navy);font-weight:600}
+.cutoff-banner{background:#fffbe6;border:1px solid #ffe58f;border-radius:14px;padding:16px 20px;margin:18px 0 24px;display:flex;align-items:flex-start;gap:14px;color:#873800;font-size:14.5px;line-height:1.55;box-shadow:0 2px 8px rgba(217,119,6,.06)}
+.cutoff-icon{font-size:22px;line-height:1;flex:0 0 24px}
+.cutoff-text strong{color:#612500;font-size:15.5px}
+.mini-link{display:inline-block;padding:4px 9px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:12px;color:var(--navy);text-decoration:none;font-weight:700;transition:all .15s}
+.mini-link:hover{background:var(--cream);border-color:var(--navy);text-decoration:none}
+.role-scripts-box{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.role-scripts-box summary{font-weight:700;cursor:pointer;color:var(--navy);font-size:14px;user-select:none}
 
 /* levels grid */
 .levels{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:16px}
@@ -141,12 +148,20 @@ p.lead{color:var(--muted);font-size:17.5px;max-width:840px;line-height:1.6;margi
   <h2 id="how-to-book">1. How to Reserve a Meeting Slot</h2>
   <p class="lead">No password needed. All slots are first-come, first-served and lock immediately upon reservation.</p>
 
+  <div class="cutoff-banner">
+    <div class="cutoff-icon">⏳</div>
+    <div class="cutoff-text">
+      <strong>Important Cut-Off Policy: Bookings close 5 days before each meeting.</strong><br>
+      To ensure the Vice President Education (VPE) and Toastmaster of the Evening have sufficient time to finalize the agenda, confirm speech evaluators, and print the official Program Sheet, <strong>all speech slots and meeting functionary roles must be booked at least 5 days prior to the meeting date</strong>.
+    </div>
+  </div>
+
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-badge">1</div>
       <h3>Choose Meeting Date</h3>
       <p>Select your month on ToastFlow. Live slot availability updates in real time for speeches and functionary roles.</p>
-      <div class="tip">💡 Regular meetings: 2nd Friday monthly.</div>
+      <div class="tip">⏳ <strong>Cut-Off:</strong> Bookings close 5 days before meeting day.</div>
     </div>
 
     <div class="step-card">
@@ -263,7 +278,9 @@ p.lead{color:var(--muted);font-size:17.5px;max-width:840px;line-height:1.6;margi
         <strong>Toastmasters Base Camp</strong>
         <p>Choose your Path, launch your Ice Breaker project tutorial, and download the evaluation sheet.</p>
         <a href="https://basecamp.toastmasters.org/" target="_blank" rel="noopener">Log in to Base Camp ↗</a>
-        <a href="https://www.toastmasters.org/resources/ice-breaker" target="_blank" rel="noopener" style="margin-top:6px">Official Ice Breaker Guide ↗</a>
+        <a href="assets/reference/1167f-ice-breaker.pdf" target="_blank" style="margin-top:6px;font-weight:700">Official Ice Breaker Guide (PDF) →</a>
+        <a href="assets/reference/ice-breaker-evaluation-form.pdf" target="_blank" style="margin-top:4px;font-weight:700">Ice Breaker Evaluation Form (PDF) →</a>
+        <a href="https://www.toastmasters.org/resources/resource-library?t=Ice+Breaker" target="_blank" rel="noopener" style="margin-top:4px;font-size:12.5px;color:var(--muted)">Browse Official Ice Breaker Hub ↗</a>
       </div>
     </div>
 
@@ -290,13 +307,43 @@ p.lead{color:var(--muted);font-size:17.5px;max-width:840px;line-height:1.6;margi
         <h4>Master Table Topics &amp; Meeting Functionaries</h4>
         <p><strong>Table Topics (Impromptu Speaking):</strong> Give a 1- to 2-minute impromptu speech on an unannounced prompt. Sharpens fast thinking, mental structure (e.g. PREP: Point, Reason, Example, Point), and poise under pressure.</p>
         <p><strong>Meeting Functionary Roles:</strong> Fulfill Level 1 role requirements to practice active listening and time management: serve as <strong>Timer</strong> (meeting pacing and timing signals), <strong>Ah-Counter</strong> (filler words and hesitation sounds), or <strong>Grammarian</strong> (word of the day & language excellence).</p>
+
+        <details class="role-scripts-box">
+          <summary>📖 Quick In-Meeting Role Scripts (Click to expand)</summary>
+          <div style="margin-top:12px;font-size:13.5px;color:var(--ink);display:flex;flex-direction:column;gap:12px">
+            <div>
+              <strong style="color:var(--navy)">⏱ Timer Script:</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-style:italic">“Mr/Madam Toastmaster, fellow members and guests: As Timer, I help our speakers practice one of the most vital communication skills: expressing their thoughts within the allotted time. For prepared speeches (5–7 min), I show Green at 5, Amber at 6, and Red at 7 min. For Table Topics (1–2 min), Green at 1, Amber at 1:30, and Red at 2 min. Speakers have a 30-second grace period. I will present the timing report when called upon.”</p>
+            </div>
+            <div>
+              <strong style="color:var(--navy)">🗣 Ah-Counter Script:</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-style:italic">“The purpose of the Ah-Counter is to note words and sounds used as a crutch or pause filler by anyone who speaks during the meeting. I will listen for sounds such as ah, um, er, and repetitive words like well, so, like, and you know. I will give a comprehensive report at the end of the meeting.”</p>
+            </div>
+            <div>
+              <strong style="color:var(--navy)">📖 Language Evaluator / Grammarian Script:</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-style:italic">“As Grammarian, my role is to introduce the Word of the Day, encourage its usage, and listen carefully to language throughout the meeting. I will note outstanding phrases, creative metaphors, as well as areas where grammar and word choice can be polished.”</p>
+            </div>
+            <div>
+              <strong style="color:var(--navy)">🎯 General Evaluator Script:</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-style:italic">“As General Evaluator, I evaluate everything that takes place throughout the meeting—from room preparation and punctuality to the quality of evaluations. I will call upon speech evaluators for their individual reports, followed by the functionary reports, before presenting my general meeting evaluation.”</p>
+            </div>
+          </div>
+        </details>
       </div>
       <div class="prog-side">
         <span class="tag">Official Resource</span>
         <strong>Club Meeting Roles &amp; Scripts</strong>
         <p>Official role descriptions, duties, and downloadable scripts for each meeting role.</p>
-        <a href="https://www.toastmasters.org/resources/club-meeting-roles" target="_blank" rel="noopener">View Official Role Scripts ↗</a>
-        <a href="https://www.toastmasters.org/magazine/magazine-issues/2021/oct/table-topics" target="_blank" rel="noopener" style="margin-top:6px">Table Topics Guide ↗</a>
+        <a href="https://www.toastmasters.org/membership/club-meeting-roles" target="_blank" rel="noopener">Official Meeting Roles Hub ↗</a>
+        <a href="https://www.toastmasters.org/magazine/magazine-issues/2017/july2017/tabletopics" target="_blank" rel="noopener" style="margin-top:4px">Table Topics Guide &amp; Tips ↗</a>
+        <a href="https://www.toastmasters.org/membership/club-meeting-roles/topicsmaster" target="_blank" rel="noopener" style="margin-top:4px">Topicsmaster Role Guide ↗</a>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.1);font-size:12.5px;color:var(--navy);font-weight:700">Official Scripts &amp; Logs:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+          <a href="https://www.toastmasters.org/resources/timer-script-and-log" target="_blank" rel="noopener" class="mini-link">⏱ Timer</a>
+          <a href="https://www.toastmasters.org/resources/ah-counter-script-and-log" target="_blank" rel="noopener" class="mini-link">🗣 Ah-Counter</a>
+          <a href="https://www.toastmasters.org/resources/grammarian-script-and-log" target="_blank" rel="noopener" class="mini-link">📖 Grammarian</a>
+          <a href="https://www.toastmasters.org/resources/toastmaster-script-and-log" target="_blank" rel="noopener" class="mini-link">🎤 Toastmaster</a>
+        </div>
       </div>
     </div>
 
