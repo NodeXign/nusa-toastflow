@@ -1,9 +1,17 @@
 {
  "_source": "Official Toastmasters Pathways evaluation forms (purpose statements)",
  "objectives": {
+  "A Dramatic Talk": {
+   "objective": "Develop an entertaining, dramatic talk using emotional appeal, characterization, and plot structure.",
+   "timing": "5–7 min"
+  },
   "Active Listening": {
    "objective": "Demonstrate your ability to listen to what others say.",
    "timing": "5–7 min"
+  },
+  "Bringing History to Life": {
+   "objective": "Take a historical event, figure, or moment and bring it to vivid life through dramatic storytelling and narrative structure.",
+   "timing": "7–9 min"
   },
   "Building a Social Media Presence": {
    "objective": "Apply your understanding of social media to enhance an established or new social media presence.",
@@ -29,6 +37,10 @@
    "objective": "Practice selecting and using a variety of visual aids during a speech.",
    "timing": "5–7 min"
   },
+  "Cross-Cultural Understanding": {
+   "objective": "Identify your own cultural identities and the stereotypes that impact others’ perceptions of him or her.",
+   "timing": "5–7 min"
+  },
   "Deliver Social Speeches": {
    "objective": "Practice delivering social speeches in front of club members.",
    "timing": "3–4 min"
@@ -37,12 +49,12 @@
    "objective": "Practice developing and presenting a longer humorous speech.",
    "timing": "18–22 min"
   },
-  "Develop Your Vision": {
-   "objective": "Develop a detailed vision for your personal life, professional life, or an organization.",
-   "timing": "5–7 min"
-  },
   "Develop a Communication Plan": {
    "objective": "Practice developing a communication plan.",
+   "timing": "5–7 min"
+  },
+  "Develop Your Vision": {
+   "objective": "Develop a detailed vision for your personal life, professional life, or an organization.",
    "timing": "5–7 min"
   },
   "Effective Body Language": {
@@ -65,12 +77,20 @@
    "objective": "Practice being aware of your thoughts and feelings, as well as the impact of your responses on others.",
    "timing": "2–3 min"
   },
+  "Get Comfortable with Visual Aids": {
+   "objective": "Select visual aids that are appropriate for your message and the audience; use visual aids with ease and confidence to enhance audience understanding.",
+   "timing": "5–7 min"
+  },
   "Get to the Point": {
    "objective": "Deliver a clear, concise message with a well-defined purpose.",
    "timing": "5 –7 min"
   },
   "High Performance Leadership": {
    "objective": "Apply your leadership and planning knowledge to develop a project plan, organize a guidance committee, and implement the plan with the help of a team.",
+   "timing": "5–7 min"
+  },
+  "How to Say It": {
+   "objective": "Select clear, accurate, descriptive, and short words, using precise arrangements and action-oriented verbs to effectively communicate your message.",
    "timing": "5–7 min"
   },
   "Ice Breaker": {
@@ -101,10 +121,6 @@
    "objective": "Apply the skills needed to successfully lead in a volunteer or other organization.",
    "timing": "8–10 min"
   },
-  "Leading Your Team": {
-   "objective": "Lead a small team to the completion of a project.",
-   "timing": "5–7 min"
-  },
   "Leading in Difficult Situations": {
    "objective": "Practice strategies for adjusting to unexpected changes to a finalized plan.",
    "timing": "5 –7 min"
@@ -113,12 +129,24 @@
    "objective": "Apply the skills needed to successfully lead in a volunteer organization.",
    "timing": "5–7 min"
   },
+  "Leading Your Team": {
+   "objective": "Lead a small team to the completion of a project.",
+   "timing": "5–7 min"
+  },
   "Lessons Learned": {
    "objective": "Learn about and apply the skills needed to run a lessons learned meeting during a project or after its completion.",
    "timing": "5–7 min"
   },
+  "Let's Get Personal": {
+   "objective": "Tell a personal story from your own life experiences that is humorous or emotionally poignant.",
+   "timing": "6–8 min"
+  },
   "Make Connections Through Networking": {
    "objective": "Develop and practice a personal strategy for building connections through networking.",
+   "timing": "5–7 min"
+  },
+  "Make Them Laugh": {
+   "objective": "Prepare a humorous speech drawn from your own personal experience; deliver the speech using the humorously exaggerated style.",
    "timing": "5–7 min"
   },
   "Manage Change": {
@@ -137,13 +165,13 @@
    "objective": "Practice planning, organizing, leading, and implementing an event.",
    "timing": "5–7 min"
   },
-  "Managing Time": {
-   "objective": "Observe your time management patterns.",
-   "timing": "5–7 min"
-  },
   "Managing a Difficult Audience": {
    "objective": "Practice the skills needed to address audience challenges when he or she presents outside of the Toastmasters club.",
    "timing": "10–15 min"
+  },
+  "Managing Time": {
+   "objective": "Observe your time management patterns.",
+   "timing": "5–7 min"
   },
   "Moderate a Panel Discussion": {
    "objective": "Apply your skills as a public speaker and leader to facilitate a panel discussion.",
@@ -160,6 +188,14 @@
   "Organise Your Speech": {
    "objective": "Select an appropriate outline; make your message clear with supporting material; use appropriate transitions; create a strong opening and conclusion.",
    "timing": "5 –7 min"
+  },
+  "Organize Your Speech": {
+   "objective": "Select an appropriate outline; make your message clear with supporting material; use appropriate transitions; create a strong opening and conclusion.",
+   "timing": "5–7 min"
+  },
+  "Persuade with Power": {
+   "objective": "Present your viewpoint in a clear, compelling manner; persuade your listeners to adopt your viewpoint or ideas, or to take the action you request.",
+   "timing": "5–7 min"
   },
   "Persuasive Speaking": {
    "objective": "Understand the types of persuasive speeches and deliver a persuasive speech at a club meeting.",
@@ -193,9 +229,21 @@
    "objective": "Work with a group to practice reaching consensus on any topic.",
    "timing": "5 –7 min"
   },
+  "Research Your Topic": {
+   "objective": "Collect information about your topic from numerous sources, carefully support your points with specific facts, examples, and illustrations, and deliver your speech effectively.",
+   "timing": "5–7 min"
+  },
   "Researching and Presenting": {
    "objective": "Learn or review basic research methods and present a well- organized, well-researched speech on any topic.",
    "timing": "5–7 min"
+  },
+  "Resources for Entertainment": {
+   "objective": "Draw entertainment material from sources other than personal experience; adapt your material for your audience and topic.",
+   "timing": "5–7 min"
+  },
+  "Speaking After Dinner": {
+   "objective": "Prepare and deliver an entertaining after-dinner speech on a specific theme or occasion; weave humor into your central message.",
+   "timing": "8–10 min"
   },
   "Successful Collaboration": {
    "objective": "Be introduced to or review strategies for working in a collaborative group.",
@@ -205,9 +253,29 @@
    "objective": "Practice the skills needed to build a cohesive team and host an event.",
    "timing": "2–3 min"
   },
+  "The Entertaining Speech": {
+   "objective": "Entertain the audience through the use of humor and/or dramatic elements; organize an entertaining speech for maximum impact.",
+   "timing": "5–7 min"
+  },
+  "The Folk Tale": {
+   "objective": "Tell a folk tale that is entertaining and carries a moral or lesson; use voice, body, and facial expression to bring characters to life.",
+   "timing": "7–9 min"
+  },
+  "The Ice Breaker": {
+   "objective": "Introduce yourself to the club and learn the basic structure of a public speech.",
+   "timing": "4–6 min"
+  },
+  "The Moral of the Story": {
+   "objective": "Tell an engaging story with a clear moral or practical lesson that inspires the audience.",
+   "timing": "6–8 min"
+  },
   "The Power of Humor in an Impromptu Speech": {
    "objective": "Develop their method for giving impromptu speeches and practice adapting rehearsed stories during a presentation.",
    "timing": "Two x 2-3 min"
+  },
+  "The Touching Story": {
+   "objective": "Tell an emotionally touching story that connects with the audience's empathy and heart.",
+   "timing": "6–8 min"
   },
   "Understanding Conflict Resolution": {
    "objective": "Develop or enhance your understanding of the steps and strategies to address conflict.",
@@ -237,6 +305,10 @@
    "objective": "Introduce or review basic presentation software strategies for creating and using slides to support or enhance a speech.",
    "timing": "5–7 min"
   },
+  "Vocal Variety": {
+   "objective": "Use voice volume, pitch, rate, and quality to reflect and add meaning and interest to your message.",
+   "timing": "5–7 min"
+  },
   "Write a Compelling Blog": {
    "objective": "Review or introduce the skills needed to write and maintain a blog.",
    "timing": "2–3 min"
@@ -245,8 +317,8 @@
    "objective": "Learn or review basic methods for writing a speech with a defined purpose and to present a well-organized speech on any topic.",
    "timing": "5–7 min"
   },
-  "Cross-Cultural Understanding": {
-   "objective": "Identify your own cultural identities and the stereotypes that impact others’ perceptions of him or her.",
+  "Your Body Speaks": {
+   "objective": "Use body language, posture, gestures, facial expressions, and eye contact to convey your message clearly and enhance your speech.",
    "timing": "5–7 min"
   }
  }

@@ -35,7 +35,10 @@ create or replace function public.register_willingness(
   p_member_name text, p_meeting_date date, p_roles text[], p_note text default ''
 ) returns jsonb language plpgsql security definer set search_path = public as $$
 begin
-  if p_meeting_date not in (date '2026-08-14',date '2026-09-11',date '2026-10-09',date '2026-11-13',date '2026-12-11') then
+  if p_meeting_date not in (
+    date '2026-08-14',date '2026-09-11',date '2026-10-09',date '2026-11-13',date '2026-12-11',
+    date '2027-01-08',date '2027-02-12',date '2027-03-12',date '2027-04-09',date '2027-05-14',date '2027-06-11'
+  ) then
     raise exception 'Invalid meeting date' using errcode='22023';
   end if;
   insert into public.member_willingness(member_name, meeting_date, willing_roles, note, updated_at)

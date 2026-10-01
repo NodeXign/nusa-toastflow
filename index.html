@@ -117,9 +117,9 @@ input,select,textarea{width:100%;margin-top:7px;padding:12px;border:1px solid va
 <body>
 <header class="top"><div class="brand"><img class="brand-logo" src="assets/club-logo.png" alt="NUS Alumni Toastmasters Club"><div><strong>ToastFlow · NUS Alumni Toastmasters</strong><small>Club meeting &amp; role planner</small></div></div><div class="top-actions" style="display:flex;gap:8px"><a class="btn ghost" href="reference.html" style="text-decoration:none">Pathways &amp; Guide</a><button class="btn ghost" onclick="openAdmin()">Admin</button><button class="btn primary" onclick="openBooking()">Reserve a Slot</button></div></header>
 
-<section class="hero"><div class="eyebrow">2026 PROGRAM SHEET</div><h1>Choose your date.<br><em>Step up and speak.</em></h1><p>Our club meets on the second Friday of every month. Members can reserve a Prepared Speech or take an open meeting role without creating an account — with smart, fair role suggestions working behind the scenes.</p><div class="actions" style="margin-top:8px"><button class="btn primary" onclick="openBooking()">Reserve a Speech or Role</button><button class="btn ghost" onclick="shareRegister()">Share to a friend to register →</button></div><div class="notice">📅 Upcoming: 11 Sep · 9 Oct · 13 Nov · 11 Dec 2026 &nbsp;·&nbsp; ⏳ <strong>Cut-off:</strong> Bookings close 5 days before each meeting</div></section>
+<section class="hero"><div class="eyebrow">2026 – 2027 PROGRAM SHEET</div><h1>Choose your date.<br><em>Step up and speak.</em></h1><p>Our club meets on the second Friday of every month. Members can reserve a Prepared Speech or take an open meeting role without creating an account — with smart, fair role suggestions working behind the scenes.</p><div class="actions" style="margin-top:8px"><button class="btn primary" onclick="openBooking()">Reserve a Speech or Role</button><button class="btn ghost" onclick="shareRegister()">Share to a friend to register →</button></div><div class="notice">📅 2026 – 2027 Chapter Meetings &nbsp;·&nbsp; ⏳ <strong>Cut-off:</strong> Bookings close 5 days before each meeting</div></section>
 
-<section class="section"><div class="section-head"><div><div class="eyebrow">UPCOMING MEETINGS</div><h2>From now to year-end.</h2></div><div class="month-tabs" id="tabs"></div></div>
+<section class="section"><div class="section-head"><div><div class="eyebrow">UPCOMING MEETINGS</div><h2>2026 – 2027 Chapter Meetings.</h2></div><div class="month-tabs" id="tabs"></div></div>
 <div class="grid"><article class="card" id="meetingCard"></article>
 <aside class="card"><div class="body"><div class="eyebrow">OPEN MEETING ROLES</div><h2 style="font-size:34px">Take a role. Build a skill.</h2><div class="roles" id="roles"></div></div><div class="footer-note">⏳ <strong>Cut-off policy:</strong> Speech and role bookings close <strong>5 days before each meeting</strong>. No account required. Enter your details so the club can confirm your reservation.</div></aside></div></section>
 
@@ -208,7 +208,13 @@ const meetings=[
 {month:'September',date:'2026-09-11',day:'11',label:'SEP',theme:'Chapter Meeting'},
 {month:'October',date:'2026-10-09',day:'09',label:'OCT',theme:'Chapter Meeting'},
 {month:'November',date:'2026-11-13',day:'13',label:'NOV',theme:'Chapter Meeting'},
-{month:'December',date:'2026-12-11',day:'11',label:'DEC',theme:'Chapter Meeting'}
+{month:'December',date:'2026-12-11',day:'11',label:'DEC',theme:'Chapter Meeting'},
+{month:'January',date:'2027-01-08',day:'08',label:'JAN',theme:'Chapter Meeting'},
+{month:'February',date:'2027-02-12',day:'12',label:'FEB',theme:'Chapter Meeting'},
+{month:'March',date:'2027-03-12',day:'12',label:'MAR',theme:'Chapter Meeting'},
+{month:'April',date:'2027-04-09',day:'09',label:'APR',theme:'Chapter Meeting'},
+{month:'May',date:'2027-05-14',day:'14',label:'MAY',theme:'Chapter Meeting'},
+{month:'June',date:'2027-06-11',day:'11',label:'JUN',theme:'Chapter Meeting'}
 ];
 const roleNames=ToastFlow.ROLES;
 // roles the club doesn't run publicly — hidden from the public homepage & booking form (still managed in admin)
@@ -301,9 +307,10 @@ function projectOptions(pathName,selected){
   const saved=selected?`<option value="${escapeHtml(selected)}" selected>${escapeHtml(selected)} (saved project)</option>`:'';
   const lv=(PATHS_DB.paths||{})[pathName];if(!lv)return saved||'<option value="">— pick a path first —</option>';
   const el=PATHS_DB.electives||{};const edu=PATHS_DB.educationSeries||{};let html='<option value="">— select project —</option>';
+  const isCommSeries=/Communication Series/i.test(pathName);
   ['Level 1','Level 2','Level 3','Level 4','Level 5'].forEach(L=>{
-    const req=(lv[L]||[]);const elec=(/Level [345]/.test(L)?(el[L]||[]):[]);
-    const series=(edu[L]||[]);
+    const req=(lv[L]||[]);const elec=(!isCommSeries&&/Level [345]/.test(L))?(el[L]||[]):[];
+    const series=(!isCommSeries)?(edu[L]||[]):[];
     const all=[
       ...req.map(p=>({name:p,tag:''})),
       ...elec.filter(p=>!req.includes(p)).map(p=>({name:p,tag:' (elective)'})),
@@ -415,7 +422,7 @@ function titleOf(note){
   return '';
 }
 // does this text look like a real Pathways project (vs a speech title)?
-function looksLikeProject(s){return /\bL[1-5]\b|\bP[1-6]\b|ice breaker|vocal variety|body language|communication style|leadership style|mentoring|humou?r|storytelling|writing a speech|active listening|reflect on your path|evaluation and feedback/i.test(String(s||''))}
+function looksLikeProject(s){return /\bL[1-5]\b|\bP[1-6]\b|\bProject\s+\d+\b|ice breaker|organize your speech|get to the point|how to say it|your body speaks|vocal variety|research your topic|visual aids|persuade with power|inspire your audience|entertaining|make them laugh|dramatic talk|after dinner|folk tale|let's get personal|moral of the story|touching story|bringing history|body language|communication style|leadership style|mentoring|humou?r|storytelling|writing a speech|active listening|reflect on your path|evaluation and feedback/i.test(String(s||''))}
 // what to show in the admin Pathways column: the stored project if it looks like one,
 // else the member's current Pathway as a starting point (never the speech title).
 function displayProject(note,memberName){
@@ -458,7 +465,7 @@ function mergedFor(date){
   });
   return out;
 }
-function renderTabs(){tabs.innerHTML=meetings.map((m,i)=>`<button class="${i===active?'active':''}" onclick="active=${i};render()">${m.month}</button>`).join('')}
+function renderTabs(){tabs.innerHTML=meetings.map((m,i)=>`<button class="${i===active?'active':''}" onclick="active=${i};render()">${m.month}${m.date.startsWith('2027')?" '27":""}</button>`).join('')}
 function render(){
   renderTabs();
   const m=meetings[active],mg=mergedFor(m.date);
@@ -475,7 +482,7 @@ function render(){
   const cutoffDate=new Date(mDate.getTime() - 5*86400000);
   const cutoffStr=cutoffDate.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
   const cutoffNotice=`<div style="background:#fffbe6;border:1px solid #ffe58f;border-radius:10px;padding:9px 12px;margin:12px 0 14px;font-size:12.5px;color:#873800;display:flex;align-items:center;gap:6px"><span>⏳</span><span><strong>Cut-off deadline:</strong> Speech &amp; role bookings close <strong>5 days before meeting</strong> (by <strong>${cutoffStr}</strong>).</span></div>`;
-  meetingCard.innerHTML=`<div class="meeting-head"><div class="date"><strong>${m.day}</strong><span>${m.label} 2026</span></div><div><h3>${themeFor(m.date)}</h3><p>Friday · ${meetingTime(m.date)} · ${venueFor(m.date).short}</p></div></div><div class="body"><div class="meta"><span>📅 ${mDate.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}</span><span>🕜 ${meetingTime(m.date)}</span><span>📍 ${venueFor(m.date).full}${venueFor(m.date).directions?` · <a href="${venueFor(m.date).directions}" target="_blank" rel="noopener">Directions</a>`:''}</span></div>${cutoffNotice}<div class="slots">${loading?'<p>Refreshing live availability…</p>':speechSlots}</div><div class="actions"><button class="btn primary" ${backendReady?'':'disabled'} onclick="openNextSpeech()">Reserve a Speech</button><button class="btn ghost" onclick="shareMeeting(${active})">Share</button><button class="btn ghost" onclick="loadBookings()">Refresh</button></div></div><div class="footer-note">${backendNote}</div>`;
+  meetingCard.innerHTML=`<div class="meeting-head"><div class="date"><strong>${m.day}</strong><span>${m.label} ${m.date.slice(0,4)}</span></div><div><h3>${themeFor(m.date)}</h3><p>Friday · ${meetingTime(m.date)} · ${venueFor(m.date).short}</p></div></div><div class="body"><div class="meta"><span>📅 ${mDate.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}</span><span>🕜 ${meetingTime(m.date)}</span><span>📍 ${venueFor(m.date).full}${venueFor(m.date).directions?` · <a href="${venueFor(m.date).directions}" target="_blank" rel="noopener">Directions</a>`:''}</span></div>${cutoffNotice}<div class="slots">${loading?'<p>Refreshing live availability…</p>':speechSlots}</div><div class="actions"><button class="btn primary" ${backendReady?'':'disabled'} onclick="openNextSpeech()">Reserve a Speech</button><button class="btn ghost" onclick="shareMeeting(${active})">Share</button><button class="btn ghost" onclick="loadBookings()">Refresh</button></div></div><div class="footer-note">${backendNote}</div>`;
   renderRoles();
   populateForm();
 }
@@ -589,7 +596,7 @@ function saveNewVisiting(){
   renderVisitingList();
   show(`Added ${name} to pool`);
 }
-function populateForm(){if(modal.open)return;meeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}" ${i===active?'selected':''}>${m.month} ${m.day}, 2026</option>`).join('');role.innerHTML=publicRoleList().map(r=>`<option>${r}</option>`).join('');role.value=genericRole(selectedRole);
+function populateForm(){if(modal.open)return;meeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}" ${i===active?'selected':''}>${m.month} ${m.day}, ${m.date.slice(0,4)}</option>`).join('');role.innerHTML=publicRoleList().map(r=>`<option>${r}</option>`).join('');role.value=genericRole(selectedRole);
   const pp=document.getElementById('projectPath');if(pp){pp.innerHTML='<option value="">— select your path —</option>'+pathList().map(p=>`<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('');}
   fillProjectSelect();}
 function fillProjectSelect(){const pp=document.getElementById('projectPath'),pj=document.getElementById('project');if(!pj)return;pj.innerHTML=pp&&pp.value?projectOptions(pp.value,''):'<option value="">— pick your path first —</option>';}
@@ -666,7 +673,7 @@ function escapeHtml(v=''){return v.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;
 // ---------- REGISTER INTEREST (willingness) ----------
 function openWill(){
   if(!configured){show('Supabase is not configured yet.');return}
-  willMeeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}" ${i===active?'selected':''}>${m.month} ${m.day}, 2026</option>`).join('');
+  willMeeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}" ${i===active?'selected':''}>${m.month} ${m.day}, ${m.date.slice(0,4)}</option>`).join('');
   willRoles.innerHTML=roleNames.map(r=>`<label style="font-weight:600;font-size:13px;display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" value="${r}" style="width:auto;margin:0">${r}</label>`).join('');
   willModal.showModal();
 }
@@ -691,7 +698,7 @@ function openAdmin(){
   document.getElementById('loginErr').style.display='none';document.getElementById('loginPass').value='';loginModal.showModal();
 }
 function showAdmin(){
-  adminMeeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}">${m.month} ${m.day}, 2026</option>`).join('');
+  adminMeeting.innerHTML=meetings.map((m,i)=>`<option value="${m.date}">${m.month} ${m.day}, ${m.date.slice(0,4)}</option>`).join('');
   adminMeeting.value=meetings[active].date;
   renderAdmin();
   adminModal.showModal();

@@ -227,27 +227,66 @@
   },
   "The Communication Series: Entertaining Speaker + Storytelling": {
    "Level 1": [
-    "Ice Breaker",
-    "Writing a Speech with Purpose",
-    "Introduction to Vocal Variety and Body Language",
-    "Organise Your Speech",
-    "Get to the Point"
+    "Project 1: The Ice Breaker",
+    "Project 2: Organize Your Speech",
+    "Project 3: Get to the Point"
    ],
    "Level 2": [
-    "Make Them Laugh",
-    "Know Your Sense of Humor",
-    "Introduction to Toastmasters Mentoring"
+    "Project 4: How to Say It",
+    "Project 5: Your Body Speaks",
+    "Project 6: Vocal Variety"
    ],
    "Level 3": [
-    "Storytelling",
-    "Inspire Your Audience"
+    "Project 7: Research Your Topic",
+    "Project 8: Get Comfortable with Visual Aids",
+    "Project 9: Persuade with Power",
+    "Project 10: Inspire Your Audience"
    ],
    "Level 4": [
-    "The Entertaining Speech"
+    "Project 1: The Entertaining Speech",
+    "Project 2: Resources for Entertainment",
+    "Project 3: Make Them Laugh",
+    "Project 4: A Dramatic Talk",
+    "Project 5: Speaking After Dinner"
    ],
    "Level 5": [
-    "Master Your Style",
-    "Reflect on Your Path"
+    "Project 1: The Folk Tale",
+    "Project 2: Let's Get Personal",
+    "Project 3: The Moral of the Story",
+    "Project 4: The Touching Story",
+    "Project 5: Bringing History to Life"
+   ]
+  },
+  "The Communication Series": {
+   "Level 1": [
+    "Project 1: The Ice Breaker",
+    "Project 2: Organize Your Speech",
+    "Project 3: Get to the Point"
+   ],
+   "Level 2": [
+    "Project 4: How to Say It",
+    "Project 5: Your Body Speaks",
+    "Project 6: Vocal Variety"
+   ],
+   "Level 3": [
+    "Project 7: Research Your Topic",
+    "Project 8: Get Comfortable with Visual Aids",
+    "Project 9: Persuade with Power",
+    "Project 10: Inspire Your Audience"
+   ],
+   "Level 4": [
+    "Project 1: The Entertaining Speech",
+    "Project 2: Resources for Entertainment",
+    "Project 3: Make Them Laugh",
+    "Project 4: A Dramatic Talk",
+    "Project 5: Speaking After Dinner"
+   ],
+   "Level 5": [
+    "Project 1: The Folk Tale",
+    "Project 2: Let's Get Personal",
+    "Project 3: The Moral of the Story",
+    "Project 4: The Touching Story",
+    "Project 5: Bringing History to Life"
    ]
   }
  }
