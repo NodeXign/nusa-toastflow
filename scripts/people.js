@@ -18,6 +18,7 @@
     {name:'Sara LIM',credentials:'',aliases:['Sara Lim']},
     {name:'Winona LIM',credentials:'',aliases:['Winona Lim']},
     {name:'CHEN Qin',credentials:'VC5',aliases:['Chen Qin']},
+    {name:'Natalie WAI',credentials:'',aliases:['Natalie Wai','Natalie']},
     {name:'Attapol PINSA',credentials:'LP1',aliases:['Attapol Pinsa'],club:'Toa Payoh Central CC',visiting:true},
     {name:'Jai Ganesh Supra',credentials:'PI3',aliases:['Jai Ganesh Supra'],club:'Ace the Place CC',visiting:true,surnameReview:true},
     {name:'Sam LIM',credentials:'DTM',aliases:['Sam Lim'],club:'Lion City',visiting:true},
