@@ -1,11 +1,11 @@
 [
   {
-    "name": "Zhaoru LIN",
+    "name": "LIN Zhaoru",
     "club": "Lion Toastmasters",
-    "credentials": "",
-    "pastRoles": "Visiting Toastmaster",
+    "credentials": "DL4",
+    "pastRoles": "Speech Evaluator (Nov 2026)",
     "contact": "97779087",
-    "notes": "Lion Toastmasters"
+    "notes": "Lion Toastmasters (also listed as Zhaoru LIN)"
   },
   {
     "name": "Shobha SINGH",
@@ -67,7 +67,7 @@
     "name": "Eugene LOW",
     "club": "SRC",
     "credentials": "PI5",
-    "pastRoles": "Speech Evaluator (Jul 2026)",
+    "pastRoles": "Speech Evaluator (Jul 2026, Nov 2026)",
     "contact": "",
     "notes": "Singapore Recreation Club (SRC) Toastmasters"
   },
@@ -162,8 +162,8 @@
   {
     "name": "Benjamin ANG",
     "club": "NUSS",
-    "credentials": "TM",
-    "pastRoles": "Visiting TM (Dec 2025)",
+    "credentials": "PI3",
+    "pastRoles": "Visiting TM (Dec 2025), Timer (Nov 2026)",
     "contact": "",
     "notes": "NUSS Toastmasters Club"
   },
@@ -214,5 +214,29 @@
     "pastRoles": "Guest / Attendee",
     "contact": "twilliam7404@gmail.com, 9855 1638",
     "notes": "Toa Payoh Central CC Toastmasters"
+  },
+  {
+    "name": "Emi CHUA",
+    "club": "",
+    "credentials": "EC5, PI4",
+    "pastRoles": "Speech Evaluator (Nov 2026)",
+    "contact": "",
+    "notes": "Visiting Speech Evaluator (Nov 2026); confirm home club"
+  },
+  {
+    "name": "CHAY Wen Liang",
+    "club": "",
+    "credentials": "DTM",
+    "pastRoles": "Speech Evaluator (Nov 2026)",
+    "contact": "",
+    "notes": "Visiting Speech Evaluator (Nov 2026), Distinguished Toastmaster; confirm home club"
+  },
+  {
+    "name": "Isabelyn Esa",
+    "club": "Competitive Speakers HK",
+    "credentials": "PI5, DL4, EH3",
+    "pastRoles": "Language Evaluator (Nov 2026)",
+    "contact": "",
+    "notes": "Competitive Speakers Hong Kong Toastmasters"
   }
 ]

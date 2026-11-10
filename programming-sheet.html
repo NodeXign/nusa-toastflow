@@ -135,6 +135,7 @@ table.obj .evallink a{font-size:11px;color:#b52f3b;text-decoration:none;font-wei
   <span id="src" style="font-size:12px;opacity:.85"></span>
   <button class="btn-ghost" onclick="location.href='index.html'">← Back to planner</button>
   <button class="btn-ghost" onclick="toggleEdit(this)">✏️ Edit text</button>
+  <button class="btn-ghost" onclick="saveStandaloneHtml()">💾 Save HTML</button>
   <button class="btn-ghost" onclick="exportWord()">⬇ Word</button>
   <button class="btn-ghost" onclick="shareSheetLink()">🔗 Share link</button>
   <button class="btn-print" onclick="window.print()">🖨 Print / Save as PDF</button>
@@ -222,10 +223,12 @@ table.obj .evallink a{font-size:11px;color:#b52f3b;text-decoration:none;font-wei
   </div>
 </section>
 
-<script src="scripts/people.js?v=25"></script>
-<script src="scripts/meeting-programmes.js?v=25"></script>
-<script src="scripts/programme.js?v=25"></script>
-<script src="scripts/recommend.js?v=25"></script>
+<script src="scripts/people.js?v=26"></script>
+<script src="scripts/meeting-programmes.js?v=26"></script>
+<script src="scripts/programme.js?v=26"></script>
+<script src="scripts/recommend.js?v=26"></script>
+<script src="scripts/sheet-assets.js?v=26"></script>
+<script src="scripts/export-docx.js?v=26"></script>
 <script>
 // ExCo — semi-static; edit here or override via payload.exco
 const DEFAULT_EXCO=[
@@ -237,6 +240,47 @@ const DEFAULT_EXCO=[
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function safeURL(s){return /^(?:https?:\/\/|assets\/)[^\s]*$/i.test(String(s||''))?String(s):'';}
+function safeImgURL(s){return safeURL(s)||(/^data:image\/(?:png|jpe?g|gif|webp);base64,[A-Za-z0-9+/=]+$/i.test(String(s||''))?String(s):'');}
+function assetURL(s){
+  const u=safeImgURL(s);
+  if(!u)return '';
+  if(window.ToastFlowAssets&&typeof window.ToastFlowAssets.resolve==='function'){
+    const resolved=window.ToastFlowAssets.resolve(u);
+    if(resolved)return resolved;
+  }
+  return u;
+}
+async function resolveImageDataUrl(img){
+  if(!img)return '';
+  const cur=img.getAttribute('src')||img.src||'';
+  if(/^data:image\//i.test(cur))return cur;
+  const resolved=assetURL(cur);
+  if(/^data:image\//i.test(resolved)){img.src=resolved;return resolved;}
+  if(img.complete&&img.naturalWidth>0){
+    try{
+      const cv=document.createElement('canvas');
+      cv.width=img.naturalWidth;cv.height=img.naturalHeight;
+      cv.getContext('2d').drawImage(img,0,0);
+      const d=cv.toDataURL('image/png');
+      if(/^data:image\//i.test(d)){img.src=d;return d;}
+    }catch(_){}
+  }
+  try{
+    const r=await fetch(img.src);const b=await r.blob();
+    const d=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});
+    if(/^data:image\//i.test(d)){img.src=d;return d;}
+  }catch(_){}
+  return cur;
+}
+async function embedAllSheetImages(){
+  const imgs=[...document.querySelectorAll('.sheet img')];
+  imgs.forEach(img=>{
+    const cur=img.getAttribute('src')||img.src||'';
+    const r=assetURL(cur);
+    if(/^data:image\//i.test(r)&&cur!==r)img.src=r;
+  });
+  await Promise.all(imgs.map(img=>(img.style.display==='none'||img.hidden)?Promise.resolve():resolveImageDataUrl(img)));
+}
 let CREDS=[];
 function credFor(name){
   if(!name||!CREDS.length)return '';
@@ -254,51 +298,47 @@ function withCred(name){
 }
 function who(name){return name?withCred(name):'<span class="open">— open —</span>'}
 
-// ---- exports: Word (.doc with embedded images) + shareable link ----
+// ---- exports: native Word (.docx with real binary media), self-contained HTML snapshot & shareable link ----
 async function exportWord(){
-  const imgs=[...document.querySelectorAll('.sheet img')];const map={};
-  await Promise.all(imgs.map(async img=>{
-    if(!img.src||img.style.display==='none'||img.hidden)return;
-    try{
-      const r=await fetch(img.src);const b=await r.blob();
-      map[img.src]=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});
-    }catch(e){}
-  }));
-  const gridToTable=(el,widths)=>{
-    if(!el)return;
-    const kids=[...el.children];const t=document.createElement('table');
-    t.setAttribute('width','100%');t.style.cssText='border-collapse:collapse;width:100%';t.setAttribute('border','0');
-    const tr=t.insertRow();
-    kids.forEach((k,i)=>{
-      const td=document.createElement('td');td.style.cssText='vertical-align:top;padding:0 6px';
-      if(widths&&widths[i])td.setAttribute('width',widths[i]);
-      td.appendChild(k);tr.appendChild(td);
-    });
-    el.replaceWith(t);
-  };
-  let body='';
-  document.querySelectorAll('.sheet').forEach((s,idx)=>{
-    const c=s.cloneNode(true);c.removeAttribute('contenteditable');
-    c.querySelectorAll('img').forEach(im=>{
-      if(im.style.display==='none'||im.hidden)im.remove();
-      else if(map[im.src])im.setAttribute('src',map[im.src]);
-    });
-    gridToTable(c.querySelector('.hdr'),['135','','185']);
-    gridToTable(c.querySelector('.body'),['195','']);
-    gridToTable(c.querySelector('.voting-grid'),['33%','33%','33%']);
-    body+=(idx?'<br clear="all" style="mso-special-character:line-break;page-break-before:always">':'')+c.outerHTML;
-  });
-  const css=document.querySelector('style').innerHTML;
-  const wcss='@page Section1{size:210mm 297mm;margin:10mm 12mm}div.Section1{page:Section1}'
-    +'body{background:#fff}.toolbar{display:none}.sheet{width:auto;min-height:0;margin:0;padding:0;box-shadow:none}'
-    +'.hdr,.body,.voting-grid{display:block}.title{text-align:center}.title h1{font-size:14pt;font-weight:bold;margin:0;line-height:1.1}'
-    +'.title .web{font-style:italic;font-size:10pt}.title .motto{font-weight:bold;font-style:italic;color:#7b2f2f;font-size:12pt}'
-    +'td{vertical-align:top}td img{max-width:100%;height:auto}';
-  const html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
-    +'<head><meta charset="utf-8"><meta name="ProgId" content="Word.Document"><title>NUSA Program Sheet</title>'
-    +'<style>'+css+wcss+'</style></head><body><div class="Section1">'+body+'</div></body></html>';
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+html],{type:'application/msword'}));
-  a.download='NUSA-Program-Sheet-'+((CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||'draft')+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+  await embedAllSheetImages();
+  const date=(CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||document.documentElement.dataset.date||'draft';
+  if(window.ToastFlowDocx&&typeof window.ToastFlowDocx.exportDocument==='function'){
+    await window.ToastFlowDocx.exportDocument('NUSA-Program-Sheet-'+date+'.docx');
+    return;
+  }
+  alert('Word exporter could not initialize. Please reload the page and try again.');
+}
+
+async function saveStandaloneHtml(){
+  await embedAllSheetImages();
+  const date=(CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||document.documentElement.dataset.date||'draft';
+  const clone=document.documentElement.cloneNode(true);
+  clone.setAttribute('data-snapshot','1');
+  if(date&&date!=='draft')clone.setAttribute('data-date',date);
+  const bodyEl=clone.querySelector('body');
+  if(bodyEl)bodyEl.classList.remove('editing');
+  clone.querySelectorAll('.sheet').forEach(s=>s.removeAttribute('contenteditable'));
+  const editBtn=clone.querySelector('.toolbar button[onclick*="toggleEdit"]');
+  if(editBtn)editBtn.textContent='✏️ Edit text';
+  const srcEl=clone.querySelector('#src');
+  if(srcEl)srcEl.textContent='· saved offline snapshot';
+  // Remove external relative script tags so offline copies have zero 404/file errors, while keeping Print / Edit / Docx export working inline.
+  clone.querySelectorAll('script[src]').forEach(s=>s.remove());
+  if(!clone.querySelector('script[data-toastflow-docx]')&&window.ToastFlowDocx&&typeof window.ToastFlowDocx.factory==='function'){
+    const docxScript=document.createElement('script');
+    docxScript.setAttribute('data-toastflow-docx','1');
+    docxScript.textContent='(function(){window.ToastFlowDocx=('+window.ToastFlowDocx.factory.toString()+')();})();';
+    const scripts=clone.querySelectorAll('script');
+    const lastScript=scripts[scripts.length-1];
+    if(lastScript&&lastScript.parentNode)lastScript.parentNode.insertBefore(docxScript,lastScript);
+    else bodyEl.appendChild(docxScript);
+  }
+  const html='<!doctype html>\n'+clone.outerHTML;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));
+  a.download='NUSA-Program-Sheet-'+date+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
 }
 
 function toggleEdit(btn){
@@ -326,13 +366,31 @@ function decodePayload(enc){try{return JSON.parse(decodeURIComponent(escape(atob
 
 function build(){
   const params=new URLSearchParams(location.search);
+  const isSnapshot=document.documentElement.dataset.snapshot==='1'||typeof ToastFlowMeetings==='undefined'||typeof ToastFlowPeople==='undefined'||typeof ToastFlowProgramme==='undefined';
+  if(isSnapshot&&!params.get('d')){
+    document.getElementById('src').textContent='· saved offline snapshot';
+    embedAllSheetImages();
+    return;
+  }
+  const urlDate=params.get('date')||'';
   let payload=params.get('d')?decodePayload(params.get('d')):null;
-  if(!payload){try{payload=JSON.parse(localStorage.getItem('toastflow_sheet')||'null')}catch(e){}}
+  if(!payload){
+    try{
+      const ls=JSON.parse(localStorage.getItem('toastflow_sheet')||'null');
+      if(ls&&(!urlDate||ls.date===urlDate))payload=ls;
+    }catch(e){}
+  }
+  if(!payload&&document.getElementById('agenda').children.length>0){
+    document.getElementById('src').textContent='· saved offline snapshot';
+    embedAllSheetImages();
+    return;
+  }
   const data=payload||{};
   CURRENT_PAYLOAD=payload;
   CREDS=data.creds||[];
   const A=data.assignments||{};
   const date=data.date||params.get('date')||'';
+  if(date)document.documentElement.dataset.date=date;
   const meetingProg=ToastFlowMeetings.get(date);
   const schedule=data.schedule||meetingProg.schedule;
   CURRENT_GUESTS=Array.isArray(data.guests)?data.guests:(meetingProg.guests||[]);
@@ -348,13 +406,18 @@ function build(){
   // Venue & Address
   const venue=(data.meta&&data.meta.venue)||meetingProg.venue||'Classroom 3.1, SMU School of Computing and Information Systems 1';
   document.getElementById('venue').textContent=venue;
-  const isAugust=date==='2026-08-14';
-  const address=data.meta?.address||meetingProg.address||(isAugust?'90 Stamford Rd, Singapore 178903':'80 Stamford Rd, Singapore 178902');
+  const isSCIS2=date==='2026-08-14'||/Information Systems 2|School of Economics|\bSCIS\s*2\b/i.test(venue);
+  const defaultAddress=isSCIS2?'90 Stamford Rd, Singapore 178903':'80 Stamford Rd, Singapore 178902';
+  const defaultDirections=isSCIS2
+    ?'https://academy.smu.edu.sg/getting-smu/smu-school-economics-school-computing-information-systems-2'
+    :'https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1';
+  const defaultMap=isSCIS2?'assets/location-map-scis2.png':'assets/location-map.png';
+  const address=data.meta?.address||meetingProg.address||defaultAddress;
   document.getElementById('meetingAddress').textContent=address;
 
   // Directions & Map (Page 2)
-  const directions=safeURL(data.meta?.directions||meetingProg.directions||'https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1');
-  const map=safeURL(data.meta?.map||meetingProg.map||'assets/location-map.png');
+  const directions=safeURL(data.meta?.directions||meetingProg.directions||defaultDirections);
+  const map=safeImgURL(data.meta?.map||meetingProg.map||defaultMap);
   const dirEl=document.getElementById('locDirections');
   if(dirEl){
     if(directions){
@@ -368,7 +431,7 @@ function build(){
   const mapEl=document.getElementById('locMap');
   if(mapEl){
     if(map){
-      mapEl.src=map;
+      mapEl.src=assetURL(map);
       mapEl.style.display='';
     } else {
       mapEl.style.display='none';
@@ -389,10 +452,10 @@ function build(){
     const im=document.getElementById(id);
     const urlDiv=document.getElementById(urlIds[i]);
     const v=votingList[i]||defaultVoting[i]||{};
-    const src=safeURL(v.image)||defaultVoting[i].image;
+    const src=safeImgURL(v.image)||defaultVoting[i].image;
     const url=safeURL(v.url);
     if(im){
-      im.src=src;
+      im.src=assetURL(src);
       im.hidden=false;
       im.style.display='';
     }
@@ -409,7 +472,8 @@ function build(){
 
   // Draft Review note
   const pending=Object.values(A).filter(a=>a.name&&a.confirmed!==true).length;
-  const openRoles=ToastFlow.ROLES.filter(r=>r!=='General Evaluator'&&!A[r]?.name).length;
+  const hasAh=schedule.ah!==''&&!meetingProg.hideAhCounter;
+  const openRoles=ToastFlow.ROLES.filter(r=>r!=='General Evaluator'&&(hasAh||r!=='Ah-Counter')&&!A[r]?.name).length;
   const noteEl=document.getElementById('reviewNote');
   if(noteEl){
     noteEl.textContent='DRAFT — '+pending+' tentative assignment(s), '+openRoles+' open role(s). Review projects, timings, venue and voting codes before publishing.';
@@ -417,10 +481,20 @@ function build(){
   }
 
   // Visiting Toastmasters list
+  const visitorList=[...(CURRENT_GUESTS||[])];
+  const seenVisitors=new Set(visitorList.map(p=>ToastFlowPeople.canonical(p.name)));
+  Object.values(A).forEach(a=>{
+    if(!a||!a.name||a.name==='TBC')return;
+    const p=ToastFlowPeople.find(a.name);
+    if(p&&p.visiting&&!seenVisitors.has(p.name)){
+      seenVisitors.add(p.name);
+      visitorList.push({name:p.name,credentials:p.credentials||'',club:p.club||''});
+    }
+  });
   const visEl=document.getElementById('visitors');
   if(visEl){
-    if(CURRENT_GUESTS.length){
-      visEl.innerHTML='<div style="font-weight:bold;margin-bottom:2px">* Visiting Toastmasters</div>'+CURRENT_GUESTS.map(p=>'<div>'+esc(p.name)+(p.club?' — '+esc(p.club):'')+'</div>').join('');
+    if(visitorList.length){
+      visEl.innerHTML='<div style="font-weight:bold;margin-bottom:2px">* Visiting Toastmasters</div>'+visitorList.map(p=>'<div>'+esc(p.name)+(p.club?' — '+esc(p.club):'')+'</div>').join('');
       visEl.style.display='';
     } else {
       visEl.innerHTML='';
@@ -503,7 +577,7 @@ function build(){
     push('',"Timer’s Report",holder('Timer'),'grp-last');
   }
 
-  push(schedule.ah,'Ah Counter Report (5 min)',holder('Ah-Counter'));
+  if(hasAh)push(schedule.ah,'Ah Counter Report (5 min)',holder('Ah-Counter'));
   push(schedule.language,'Language Evaluation (10 min)',holder('Language Evaluator'));
   push(schedule.awards,"Awards Presentation &amp; President’s Closing Address",who(excoName('President')));
   push(schedule.end,'Meeting Adjourned','All');
@@ -527,6 +601,8 @@ function build(){
     return `<tr><td class="c1">${projLabel}${titleHtml}${link}</td><td class="c2">${o.objective?esc(o.objective):'Full project objectives to be confirmed'}</td><td class="c3">${o.timing?esc(o.timing):'TBC'}</td></tr>`});
   document.getElementById('objectives').innerHTML=objRows.length?objRows.join('')
     :'<tr><td class="c1 open">Prepared-speech projects</td><td class="c2 open">Objectives appear here once speeches list their Pathways projects.</td><td class="c3"></td></tr>';
+
+  embedAllSheetImages();
 }
 build();
 </script>

@@ -191,13 +191,13 @@ input,select,textarea{width:100%;margin-top:7px;padding:12px;border:1px solid va
 </form></dialog>
 <div class="toast" id="toast"></div>
 
-<script src="scripts/people.js?v=21"></script>
-<script src="scripts/meeting-programmes.js?v=22"></script>
-<script src="scripts/meeting-editor.js?v=22"></script>
-<script src="scripts/programme.js?v=21"></script>
-<script src="scripts/recommend.js?v=21"></script>
-<script src="scripts/appointments.js?v=20"></script>
-<script src="scripts/poster-card.js?v=20"></script>
+<script src="scripts/people.js?v=26"></script>
+<script src="scripts/meeting-programmes.js?v=26"></script>
+<script src="scripts/meeting-editor.js?v=26"></script>
+<script src="scripts/programme.js?v=26"></script>
+<script src="scripts/recommend.js?v=26"></script>
+<script src="scripts/appointments.js?v=26"></script>
+<script src="scripts/poster-card.js?v=26"></script>
 <script>
 const SUPABASE_URL=document.querySelector('meta[name="supabase-url"]').content;
 const SUPABASE_ANON_KEY=document.querySelector('meta[name="supabase-anon-key"]').content;
@@ -270,14 +270,22 @@ function meetingStart(date,utc=false){const [h,m]=ToastFlowMeetings.get(date).sc
 function meetingEnd(date,utc=false){const [h,m]=ToastFlowMeetings.get(date).schedule.end24.split(':');return String(Number(h)-(utc?8:0)).padStart(2,'0')+m+'00';}
 // Venue is per-meeting. Only 14 Aug is confirmed; Sep–Dec rooms are still TBC.
 const SMU_DIRECTIONS='https://academy.smu.edu.sg/getting-smu/smu-school-economics-school-computing-information-systems-2';
+const SCIS1_DIRECTIONS='https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1';
 const VENUES={
   '2026-08-14':{short:'SMU · Classroom 2.2',full:'Singapore Management University, School of Economics / School of Information Systems 2, Classroom 2.2',directions:SMU_DIRECTIONS}
 };
 let VENUE_OVERRIDES={}; // {date: venue text} maintained in the admin, stored in Supabase
+function venueDirections(v,programme,date){
+  if(programme&&v===programme.venue&&programme.directions)return programme.directions;
+  if(programme&&programme.directions)return programme.directions;
+  if(/Information Systems 2|School of Economics|\bSCIS\s*2\b/i.test(v||'')||date==='2026-08-14')return SMU_DIRECTIONS;
+  if(/Information Systems 1|\bSCIS\s*1\b/i.test(v||''))return SCIS1_DIRECTIONS;
+  return '';
+}
 function venueFor(date){
   const programme=ToastFlowMeetings.get(date);
-  if(VENUE_OVERRIDES[date]){const v=VENUE_OVERRIDES[date];return{short:v.length>28?v.slice(0,26)+'…':v,full:v,directions:v===programme.venue?programme.directions||'':date==='2026-08-14'?SMU_DIRECTIONS:''};}
-  if(programme.venue)return {short:programme.venue,full:programme.venue,directions:programme.directions||''};
+  if(VENUE_OVERRIDES[date]){const v=VENUE_OVERRIDES[date];return{short:v.length>28?v.slice(0,26)+'…':v,full:v,directions:venueDirections(v,programme,date)};}
+  if(programme.venue)return {short:programme.venue,full:programme.venue,directions:programme.directions||venueDirections(programme.venue,programme,date)};
   return VENUES[date]||{short:'To be confirmed',full:'Venue to be confirmed',directions:''};
 }
 let THEME_OVERRIDES={}; // {date: theme text} maintained in the admin
@@ -401,7 +409,12 @@ async function shareRegister(){const m=meetings[active];const d=new Date(m.date)
 // hold types (planning placeholders, shown only in admin — never as detail to the public)
 function isExternal(name,note){return /\[EXTERNAL/i.test(note||'')||/^external\b/i.test(name||'')}
 function isSoftBlock(note){return /\[SOFTBLOCK\]/i.test(note||'')}
-function isHold(name,note){return isExternal(name,note)||isSoftBlock(note)}
+function isHold(name,note){
+  if(isSoftBlock(note))return true;
+  const clean=ToastFlowPeople.clean(name);
+  if(!clean||/^(external(?:\s*[—-].*|\s+to\s+be\s+added)?|tbc|tbd|to\s+be\s+confirmed)$/i.test(clean))return true;
+  return false;
+}
 // tentative sheet notes (?, TBC, TBD, "one more", "to be decided") are NOT firm → treat as open
 function isTentative(v){return /\?|(^|[^a-z])(tbc|tbd)([^a-z]|$)|one more|to be decided/i.test(String(v||''))}
 // a slot counts as filled only if it has a real name and isn't left open/tentative

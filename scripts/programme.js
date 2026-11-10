@@ -2,6 +2,7 @@
    July included officers' installation and is not a standard timing template. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ToastFlowProgramme=api;})(typeof self!=='undefined'?self:this,function(){
   const objectives={
+    'Evaluation and Feedback':{objective:'Present a speech on any topic, receive feedback, and apply the feedback to a second speech.',timing:'5–7 min'},
     'Evaluation and Feedback First Speech':{objective:'The purpose of this project is to practice applying feedback and serve as a speech evaluator during a club meeting. The purpose of this speech is for the member to present a speech and receive feedback from the evaluator.',timing:'5–7 min'},
     'How to Say It':{objective:'The purpose of this project is for the speaker to select clear, accurate, descriptive, and short words, using precise arrangements and action-oriented verbs to effectively communicate their message to the audience.',timing:'5–7 min'},
     'Better Speaker Series - Beginning Your Speech':{objective:'The purpose of this project is to provide criteria and techniques for speech openings, helping club members grab audience attention, establish rapport, and introduce their topic effectively.',timing:'10–15 min'},
@@ -34,7 +35,7 @@
     'Introduction to Vocal Variety and Body Language':{objective:'The purpose of this project is for the member to practice using vocal variety or body language to enhance a speech.',timing:'5–7 min'},
     'The Power of Humour in an Impromptu Speech':{objective:'The purpose of this project is for the member to develop their method for giving impromptu speeches and practice adapting rehearsed stories during a presentation.',timing:'Two × 2–3 min speeches at the same meeting'}
   };
-  const bare=s=>String(s||'').replace(/^.*?\bL[1-5]\s*:\s*/i,'').replace(/^Project\s+\d+\s*:\s*/i,'').trim();
+  const bare=s=>String(s||'').replace(/^.*?\bL[1-5](?:\s*:?\s*Project\s+\d+)?\s*:\s*/i,'').replace(/^Project\s+\d+\s*:\s*/i,'').trim();
   const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
   function lookup(map,project){const k=bare(project);return map[k]||Object.entries(map).find(([n])=>norm(n)===norm(k))?.[1]||null;}
   return {objectives,bare,lookup};

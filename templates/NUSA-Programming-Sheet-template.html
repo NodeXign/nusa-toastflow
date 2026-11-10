@@ -2,86 +2,140 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Program Sheet · NUS Alumni Toastmasters</title>
 <style>
 /* ---- faithful replica of the club's Word/PDF program sheet ---- */
 :root{--link:#0563c1;--maroon:#7b2f2f;--border:#000}
 *{box-sizing:border-box}
-body{margin:0;background:#54595f;color:#000;font-family:"Times New Roman",Times,Georgia,serif;font-size:10pt;line-height:1.22}
+body{margin:0;background:#54595f;color:#000;font-family:"Times New Roman",Times,Georgia,serif;font-size:10pt;line-height:1.2}
 .toolbar{position:sticky;top:0;z-index:5;display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 18px;background:#18243f;color:#fff;font-family:Inter,system-ui,sans-serif}
 .toolbar strong{margin-right:auto}
 .toolbar button{border:0;border-radius:8px;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer}
 .btn-print{background:#d7ad59;color:#241c05}.btn-ghost{background:rgba(255,255,255,.16);color:#fff}
-.sheet{background:#fff;width:210mm;min-height:296mm;margin:16px auto;padding:11mm 12mm;box-shadow:0 10px 40px rgba(0,0,0,.3)}
-a{color:var(--link)}
+
+.sheet{
+  background:#fff;
+  width:210mm;
+  min-height:297mm;
+  margin:16px auto;
+  padding:10mm 12mm;
+  box-shadow:0 10px 40px rgba(0,0,0,.3);
+  position:relative;
+}
+.review-note{border:1px solid #9e7200;background:#fff8e6;padding:4px 6px;margin:4px 0;font-size:8.5pt}
+body.editing .sheet{outline:2px dashed #d7ad59;outline-offset:4px}
+body.editing .sheet [contenteditable] *:focus,body.editing .sheet:focus{background:#fff8e6}
+[contenteditable]:focus{outline:1px solid #d7ad59}
+a{color:var(--link);text-decoration:underline}
 
 /* header */
-.hdr{display:grid;grid-template-columns:150px 1fr 170px;align-items:center;gap:8px}
-.hdr img{max-width:100%;height:auto}
+.hdr{display:grid;grid-template-columns:135px 1fr 185px;align-items:center;gap:10px}
+.hdr img.tm-logo{max-width:125px;max-height:105px;height:auto;object-fit:contain}
+.hdr img.nus-logo{max-width:180px;max-height:85px;height:auto;object-fit:contain;justify-self:end}
 .hdr .title{text-align:center}
-.hdr .title h1{font-size:20pt;font-weight:bold;margin:0;line-height:1.1}
-.hdr .title .web{font-style:italic;font-size:10.5pt;margin-top:3px}
+.hdr .title h1{font-size:14pt;font-weight:bold;margin:0;line-height:1.15;letter-spacing:0.5px}
+.hdr .title .web{font-style:italic;font-size:10pt;margin-top:3px}
+.hdr .title .web a{color:#000;text-decoration:underline}
 .hdr .title .motto{font-weight:bold;font-style:italic;color:var(--maroon);font-size:12pt;margin-top:3px}
 .rule{border:0;border-top:1.5px solid #000;margin:6px 0 8px}
 
 /* two-column body */
-.body{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:start}
-.exco h2{font-style:italic;font-weight:bold;font-size:12pt;margin:0}
-.exco .term{font-weight:bold;margin-bottom:8px}
-.exco .role{font-weight:bold;margin-top:6px}
-.exco .name{}
-.exco .contact{margin-top:10px}
-.exco .paynow{font-weight:bold;margin-top:12px}
-.exco .qr{width:120px;height:120px;margin:6px 0}
-.exco .fine{margin-top:6px}
+.body{display:grid;grid-template-columns:195px 1fr;gap:14px;align-items:start}
+.exco h2{font-style:italic;font-weight:bold;font-size:11pt;margin:0}
+.exco .term{font-weight:bold;font-size:10pt;margin-bottom:6px}
+.exco .role{font-weight:bold;font-size:9.5pt;margin-top:5px;line-height:1.15}
+.exco .name{font-size:9.5pt;line-height:1.15}
+.exco .visitors{margin-top:8px;font-size:9pt;line-height:1.2}
+.exco .contact{margin-top:8px;font-size:9.5pt;line-height:1.25}
+.exco .contact b,.exco .fb b{font-weight:bold}
+.exco .fb{font-size:9.5pt;line-height:1.25}
+.exco .paynow{font-weight:bold;font-size:9.5pt;margin-top:8px;line-height:1.2}
+.exco .qr{width:86px;height:86px;margin:3px 0 2px;display:block}
+.exco .fine{font-size:8pt;line-height:1.15;color:#333;margin-bottom:4px}
+.exco .guest-reg{font-weight:bold;font-size:9.5pt;margin-top:6px;line-height:1.2}
 
 /* agenda table */
-.ag-top{text-align:center;font-weight:bold;margin-bottom:2px}
-.ag-meta{margin-bottom:6px}
-.ag-meta b{font-weight:bold}
-table.agenda{width:100%;border-collapse:collapse;table-layout:fixed}
-table.agenda td{border:1px solid #000;padding:2.5px 5px;vertical-align:top}
-.col-t{width:62px;white-space:nowrap}
-.col-p{width:38%;color:var(--navy);font-weight:700}
-/* grouped rows: keep the vertical column dividers, drop the horizontal lines between them */
+.ag-top{text-align:center;font-weight:bold;font-size:10pt;margin-bottom:3px}
+.ag-meta{font-size:10pt;line-height:1.25;margin-bottom:6px}
+.ag-meta .venue-row b,.ag-meta .dress-row b{font-weight:bold}
+.ag-meta .addr-row{font-weight:bold;font-style:italic}
+table.agenda{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9.5pt;line-height:1.2}
+table.agenda td{border:1px solid #000;padding:2px 4px;vertical-align:top}
+table.agenda tr{break-inside:avoid}
+.col-t{width:56px;white-space:nowrap}
+.col-item{width:auto}
+.col-p{width:35%}
+/* grouped rows: keep outer & column borders, drop internal horizontal borders */
 table.agenda tr.grp-first td{border-bottom:0}
 table.agenda tr.grp-mid td{border-top:0;border-bottom:0}
 table.agenda tr.grp-last td{border-top:0}
-.agenda ol{margin:2px 0 2px 0;padding-left:18px}
-.agenda ol li{margin:1px 0}
-.agenda .rpt{margin-top:6px}
+.ag-section-title{font-weight:bold;font-style:italic;margin-bottom:2px}
+.ag-spacer td{height:8px;padding:0;border-top:0;border-bottom:0}
 .who{white-space:pre-line}
 .open{color:#888;font-style:italic}
 
-/* awards box */
-table.awards{width:100%;border-collapse:collapse;margin-top:12px}
-table.awards td{border:1px solid #000;padding:10px 8px 20px;font-weight:bold;width:33.33%;vertical-align:top}
-
 /* page 2 */
-.p2 h2{font-weight:bold;text-decoration:underline;font-size:14pt;margin:0 0 6px}
-.p2 .menti{font-weight:bold;margin:9px 0 3px}
-.p2 .menti-qr{width:82px;height:82px}
-table.obj{width:100%;border-collapse:collapse;margin:5px 0 10px}
-table.obj td{border:1px solid #000;padding:5px 8px;vertical-align:top}
-table.obj .c1{width:30%}table.obj .c3{width:22%}
-.p2 .loc b{font-weight:bold}
-.p2 .map{width:100%;max-width:640px;max-height:300px;height:auto;object-fit:contain;object-position:left top;margin-top:5px;border:1px solid #999}
-.section-gap{height:12px}
+table.awards{width:100%;border-collapse:collapse;margin:0 0 12px;table-layout:fixed}
+table.awards td{border:1px solid #000;padding:6px 8px 32px;font-weight:bold;font-size:10pt;width:33.333%;vertical-align:top}
+
+.p2-heading{font-size:12pt;font-weight:bold;text-decoration:underline;margin:10px 0 6px;color:#000}
+.voting-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 14px;align-items:start}
+.voting-col{font-size:10pt}
+.menti-title{font-size:10pt;line-height:1.2;margin-bottom:4px}
+.menti-qr{width:68px;height:68px;display:block;margin:4px 0;object-fit:contain}
+.menti-url{font-size:9pt;word-break:break-all}
+.menti-url a{color:var(--link);text-decoration:underline}
+
+table.obj{width:100%;border-collapse:collapse;margin:4px 0 14px;font-size:10pt;table-layout:fixed}
+table.obj td{border:1px solid #000;padding:4px 6px;vertical-align:top;line-height:1.25;white-space:pre-line}
+table.obj .c1{width:32.5%}
+table.obj .c2{width:57%}
+table.obj .c3{width:10.5%;white-space:nowrap}
+table.obj .evallink{margin-top:4px}
+table.obj .evallink a{font-size:11px;color:#b52f3b;text-decoration:none;font-weight:700}
+
+.loc-dir{font-size:10pt;margin:4px 0 6px;word-break:break-all}
+.loc-dir b{font-weight:bold}
+.loc-dir a{color:var(--link);text-decoration:underline}
+.p2 .map{width:100%;max-height:260px;height:auto;object-fit:contain;object-position:left top;margin-top:4px;border:1px solid #000;display:block}
 
 @media print{
   body{background:#fff}
   .toolbar{display:none}
-  .sheet{width:auto;min-height:0;margin:0;padding:12mm;box-shadow:none;page-break-after:always}
-  .sheet:last-child{page-break-after:auto}
+  .sheet{
+    width:210mm;
+    height:297mm;
+    min-height:297mm;
+    max-height:297mm;
+    margin:0;
+    padding:10mm 12mm;
+    box-shadow:none;
+    page-break-after:always;
+    break-after:page;
+    page-break-inside:avoid;
+    overflow:hidden;
+  }
+  .sheet:last-of-type{
+    page-break-after:auto;
+    break-after:auto;
+  }
 }
-@page{size:A4;margin:0}
+@page{
+  size:A4 portrait;
+  margin:0;
+}
 </style>
 </head>
 <body>
 <div class="toolbar">
   <strong>ToastFlow · Program Sheet</strong>
   <span id="src" style="font-size:12px;opacity:.85"></span>
-  <button class="btn-ghost" onclick="location.href='index.html'">← Back to planner</button>
+  <button class="btn-ghost" onclick="location.href='../index.html'">← Back to planner</button>
+  <button class="btn-ghost" onclick="toggleEdit(this)">✏️ Edit text</button>
+  <button class="btn-ghost" onclick="saveStandaloneHtml()">💾 Save HTML</button>
   <button class="btn-ghost" onclick="exportWord()">⬇ Word</button>
   <button class="btn-ghost" onclick="shareSheetLink()">🔗 Share link</button>
   <button class="btn-print" onclick="window.print()">🖨 Print / Save as PDF</button>
@@ -90,13 +144,13 @@ table.obj .c1{width:30%}table.obj .c3{width:22%}
 <!-- ================= PAGE 1 ================= -->
 <section class="sheet">
   <div class="hdr">
-    <img src="assets/tm-logo.png" alt="Toastmasters International">
+    <img class="tm-logo" src="assets/tm-logo.png" alt="Toastmasters International">
     <div class="title">
       <h1>NUS ALUMNI<br>TOASTMASTERS CLUB</h1>
       <div class="web">Web Site: <a href="http://nusalumni.toastmastersclubs.org">http://nusalumni.toastmastersclubs.org</a></div>
       <div class="motto">"To Live and To Grow"</div>
     </div>
-    <img src="assets/nus-logo.png" alt="National University of Singapore">
+    <img class="nus-logo" src="assets/nus-logo.png" alt="National University of Singapore">
   </div>
   <hr class="rule">
 
@@ -104,163 +158,451 @@ table.obj .c1{width:30%}table.obj .c3{width:22%}
     <!-- LEFT: Executive Committee -->
     <div class="exco">
       <h2>Executive Committee</h2>
-      <div class="term">2026/ 2027</div>
+      <div class="term" id="excoTerm">2026/ 2027</div>
       <div id="excoList"></div>
-      <div class="contact"><b>Email</b>: <a href="mailto:nusatm@gmail.com">nusatm@gmail.com</a></div>
-      <div><b>Facebook</b>: @nusalumnitm</div>
-      <div><b>Toastmasters Pathways:</b><br><a href="https://www.toastmasters.org/pathways-overview">https://www.toastmasters.org/pathways-overview</a></div>
+      <div class="visitors" id="visitors"></div>
+      <div class="contact"><b>Email:</b> <a href="mailto:nusatm@gmail.com">nusatm@gmail.com</a></div>
+      <div class="fb"><b>Facebook:</b> @nusalumnitm</div>
       <div class="paynow">Membership and guest fee - PayNow to NUSA TMC</div>
       <img class="qr" src="assets/paynow-qr.png" alt="PayNow QR">
       <div class="fine">Guest fee of $10 applies for walk-in guests.</div>
+      <div class="guest-reg">Guest Registration</div>
+      <img class="qr" src="assets/eventbrite-qr.png" alt="Guest Registration QR">
     </div>
 
     <!-- RIGHT: Agenda -->
     <div>
       <div class="ag-top" id="agDate">Friday, __ ______ 20__</div>
       <div class="ag-meta">
-        <div><b>Venue:</b> <span id="venue">Classroom 2.2, SMU, School of Economics/School of Information Systems 2,</span></div>
-        <div><b>Address:</b> 90 Stamford Rd, Singapore 178903</div>
-        <div><b>Dress Code:</b> Business casual (no shorts or slippers)</div>
+        <div class="venue-row"><b>Venue:</b> <span id="venue">Classroom 3.1, SMU School of Computing and Information Systems 1</span></div>
+        <div class="addr-row">Address: <span id="meetingAddress">80 Stamford Rd, Singapore 178902</span></div>
+        <div class="dress-row"><b>Dress Code:</b> Business casual (no shorts or slippers)</div>
       </div>
+      <div id="reviewNote" class="review-note"></div>
       <table class="agenda"><tbody id="agenda"></tbody></table>
     </div>
   </div>
-
-  <table class="awards"><tr>
-    <td>Best Prepared Speech Speaker:</td>
-    <td>Best Table Topics Speaker:</td>
-    <td>Best Evaluator:</td>
-  </tr></table>
 </section>
 
 <!-- ================= PAGE 2 ================= -->
 <section class="sheet p2">
-  <h2>Vote for Best Speeches</h2>
-  <div class="menti">Menti.com code (Best Prepared Speech):</div>
-  <img class="menti-qr" src="assets/menti-prepared.png" alt="">
-  <div class="menti">Menti.com code (Best Table Topics):</div>
-  <img class="menti-qr" src="assets/menti-tabletopics.png" alt="">
-  <div class="menti">Menti.com code (Best Evaluator):</div>
-  <img class="menti-qr" src="assets/menti-evaluator.png" alt="">
+  <table class="awards">
+    <tr>
+      <td>Best Prepared Speech Speaker:</td>
+      <td>Best Table Topics Speaker:</td>
+      <td>Best Evaluator:</td>
+    </tr>
+  </table>
 
-  <div class="section-gap"></div>
-  <h2>Project Objectives</h2>
+  <h2 class="p2-heading">Vote for Best Speeches</h2>
+  <div class="voting-grid">
+    <div class="voting-col">
+      <div class="menti-title">Menti.com code (Best Prepared Speech):</div>
+      <img class="menti-qr" id="mentiPrepared" src="assets/menti-prepared.png?v=3" alt="Best Prepared Speech QR">
+      <div class="menti-url" id="mentiPreparedUrl"></div>
+    </div>
+    <div class="voting-col">
+      <div class="menti-title">Menti.com code (Best Table Topics):</div>
+      <img class="menti-qr" id="mentiTopics" src="assets/menti-tabletopics.png?v=3" alt="Best Table Topics QR">
+      <div class="menti-url" id="mentiTopicsUrl"></div>
+    </div>
+    <div class="voting-col">
+      <div class="menti-title">Menti.com code (Best Evaluator):</div>
+      <img class="menti-qr" id="mentiEvaluator" src="assets/menti-evaluator.png?v=3" alt="Best Evaluator QR">
+      <div class="menti-url" id="mentiEvaluatorUrl"></div>
+    </div>
+  </div>
+
+  <h2 class="p2-heading">Project Objectives</h2>
   <table class="obj"><tbody id="objectives"></tbody></table>
 
-  <div class="section-gap"></div>
-  <div class="loc">
-    <h2>Location</h2>
-    <div><b>Address</b>: SMU School of Economics/ School of Computing &amp; Information Systems 2</div>
-    <div>90 Stamford Rd, Singapore 178903</div>
-    <div><b>Directions</b>: <a href="https://academy.smu.edu.sg/getting-smu/smu-school-economics-school-computing-information-systems-2">https://academy.smu.edu.sg/getting-smu/smu-school-economics-school-computing-information-systems-2</a></div>
-    <img class="map" src="assets/location-map.png" alt="Location map">
+  <div class="loc" id="locationDetails">
+    <h2 class="p2-heading">Location</h2>
+    <div class="loc-dir"><b>Directions:</b> <a id="locDirections" href="https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1" target="_blank" rel="noopener">https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1</a></div>
+    <img class="map" id="locMap" src="assets/location-map.png" alt="Location map">
   </div>
 </section>
 
-<script src="scripts/recommend.js"></script>
+<script src="../scripts/people.js?v=26"></script>
+<script src="../scripts/meeting-programmes.js?v=26"></script>
+<script src="../scripts/programme.js?v=26"></script>
+<script src="../scripts/recommend.js?v=26"></script>
+<script src="../scripts/sheet-assets.js?v=26"></script>
+<script src="../scripts/export-docx.js?v=26"></script>
 <script>
 // ExCo — semi-static; edit here or override via payload.exco
 const DEFAULT_EXCO=[
   ['President','WEE Gee Shing'],['VP (Education)','XU Jiaqi'],
   ['VP (Membership)','Jonta KOGA'],['VP (Public Relations)','Jayden TEO'],
   ['Sergeant at Arms','Sandy GOH'],['Secretary','LER Wee Meng'],
-  ['Treasurer','TU Yu'],['Immediate Past President','Sabrina Xu']
+  ['Treasurer','TU Yu'],['Immediate Past President','Sabrina XU']
 ];
 
-function esc(s){return String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
-function who(name){return name?esc(name):'<span class="open">— open —</span>'}
-
-// ---- exports: Word (.doc with embedded images) + shareable link ----
-async function exportWord(){
-  const imgs=[...document.querySelectorAll('.sheet img')];const map={};
-  await Promise.all(imgs.map(async img=>{try{const r=await fetch(img.src);const b=await r.blob();map[img.src]=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});}catch(e){}}));
-  const css=document.querySelector('style').innerHTML;let body='';
-  document.querySelectorAll('.sheet').forEach(s=>{const c=s.cloneNode(true);c.querySelectorAll('img').forEach(im=>{if(map[im.src])im.setAttribute('src',map[im.src]);});body+=c.outerHTML;});
-  const html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>'+css+' body{background:#fff}</style></head><body>'+body+'</body></html>';
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+html],{type:'application/msword'}));
-  a.download='NUSA-Program-Sheet-'+((CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||'draft')+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function safeURL(s){return /^(?:https?:\/\/|assets\/)[^\s]*$/i.test(String(s||''))?String(s):'';}
+function safeImgURL(s){return safeURL(s)||(/^data:image\/(?:png|jpe?g|gif|webp);base64,[A-Za-z0-9+/=]+$/i.test(String(s||''))?String(s):'');}
+function assetURL(s){
+  const u=safeImgURL(s);
+  if(!u)return '';
+  if(window.ToastFlowAssets&&typeof window.ToastFlowAssets.resolve==='function'){
+    const resolved=window.ToastFlowAssets.resolve(u);
+    if(resolved)return resolved;
+  }
+  return u;
 }
+async function resolveImageDataUrl(img){
+  if(!img)return '';
+  const cur=img.getAttribute('src')||img.src||'';
+  if(/^data:image\//i.test(cur))return cur;
+  const resolved=assetURL(cur);
+  if(/^data:image\//i.test(resolved)){img.src=resolved;return resolved;}
+  if(img.complete&&img.naturalWidth>0){
+    try{
+      const cv=document.createElement('canvas');
+      cv.width=img.naturalWidth;cv.height=img.naturalHeight;
+      cv.getContext('2d').drawImage(img,0,0);
+      const d=cv.toDataURL('image/png');
+      if(/^data:image\//i.test(d)){img.src=d;return d;}
+    }catch(_){}
+  }
+  try{
+    const r=await fetch(img.src);const b=await r.blob();
+    const d=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});
+    if(/^data:image\//i.test(d)){img.src=d;return d;}
+  }catch(_){}
+  return cur;
+}
+async function embedAllSheetImages(){
+  const imgs=[...document.querySelectorAll('.sheet img')];
+  imgs.forEach(img=>{
+    const cur=img.getAttribute('src')||img.src||'';
+    const r=assetURL(cur);
+    if(/^data:image\//i.test(r)&&cur!==r)img.src=r;
+  });
+  await Promise.all(imgs.map(img=>(img.style.display==='none'||img.hidden)?Promise.resolve():resolveImageDataUrl(img)));
+}
+let CREDS=[];
+function credFor(name){
+  if(!name||!CREDS.length)return '';
+  const nt=String(name).toLowerCase().split(/\s+/).filter(t=>t.length>1);
+  let best='',bs=0;
+  for(const c of CREDS){const ct=String(c.name).toLowerCase().split(/\s+/);const s=ct.filter(t=>nt.includes(t)).length;if(s>bs){bs=s;best=c.cred;}}
+  return bs>=2?best:'';
+}
+function withCred(name){
+  const guest=(CURRENT_GUESTS||[]).find(g=>ToastFlowPeople.canonical(g.name)===ToastFlowPeople.canonical(name));
+  if(guest)return esc(guest.name+(guest.credentials?', '+guest.credentials:'')+'*');
+  const p=ToastFlowPeople.find(name);
+  if(p)return esc(ToastFlowPeople.label(name));
+  return esc(ToastFlowPeople.clean(name));
+}
+function who(name){return name?withCred(name):'<span class="open">— open —</span>'}
+
+// ---- exports: native Word (.docx with real binary media), self-contained HTML snapshot & shareable link ----
+async function exportWord(){
+  await embedAllSheetImages();
+  const date=(CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||document.documentElement.dataset.date||'draft';
+  if(window.ToastFlowDocx&&typeof window.ToastFlowDocx.exportDocument==='function'){
+    await window.ToastFlowDocx.exportDocument('NUSA-Program-Sheet-'+date+'.docx');
+    return;
+  }
+  alert('Word exporter could not initialize. Please reload the page and try again.');
+}
+
+async function saveStandaloneHtml(){
+  await embedAllSheetImages();
+  const date=(CURRENT_PAYLOAD&&CURRENT_PAYLOAD.date)||document.documentElement.dataset.date||'draft';
+  const clone=document.documentElement.cloneNode(true);
+  clone.setAttribute('data-snapshot','1');
+  if(date&&date!=='draft')clone.setAttribute('data-date',date);
+  const bodyEl=clone.querySelector('body');
+  if(bodyEl)bodyEl.classList.remove('editing');
+  clone.querySelectorAll('.sheet').forEach(s=>s.removeAttribute('contenteditable'));
+  const editBtn=clone.querySelector('.toolbar button[onclick*="toggleEdit"]');
+  if(editBtn)editBtn.textContent='✏️ Edit text';
+  const srcEl=clone.querySelector('#src');
+  if(srcEl)srcEl.textContent='· saved offline snapshot';
+  // Remove external relative script tags so offline copies have zero 404/file errors, while keeping Print / Edit / Docx export working inline.
+  clone.querySelectorAll('script[src]').forEach(s=>s.remove());
+  if(!clone.querySelector('script[data-toastflow-docx]')&&window.ToastFlowDocx&&typeof window.ToastFlowDocx.factory==='function'){
+    const docxScript=document.createElement('script');
+    docxScript.setAttribute('data-toastflow-docx','1');
+    docxScript.textContent='(function(){window.ToastFlowDocx=('+window.ToastFlowDocx.factory.toString()+')();})();';
+    const scripts=clone.querySelectorAll('script');
+    const lastScript=scripts[scripts.length-1];
+    if(lastScript&&lastScript.parentNode)lastScript.parentNode.insertBefore(docxScript,lastScript);
+    else bodyEl.appendChild(docxScript);
+  }
+  const html='<!doctype html>\n'+clone.outerHTML;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));
+  a.download='NUSA-Program-Sheet-'+date+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+}
+
+function toggleEdit(btn){
+  const on=!document.body.classList.contains('editing');
+  document.body.classList.toggle('editing',on);
+  document.querySelectorAll('.sheet').forEach(s=>s.contentEditable=on);
+  btn.textContent=on?'✓ Done editing':'✏️ Edit text';
+}
+
 async function shareSheetLink(){
+  if(sheetEdited){alert('Text edits are included in Word / Print exports. Use those exports for this edited version; generate a new sheet after updating the planner to share a data snapshot.');return;}
   if(!CURRENT_PAYLOAD){alert('Open this sheet from the planner (Generate Program Sheet) first, then Share.');return;}
   const enc=btoa(unescape(encodeURIComponent(JSON.stringify(CURRENT_PAYLOAD))));
-  const url=location.origin+location.pathname+'?d='+enc;
-  try{if(navigator.share){await navigator.share({title:'NUSA Program Sheet',url});return;}}catch(e){/* user cancelled / not available → fall through */}
+  const url=location.origin+location.pathname+'?d='+encodeURIComponent(enc);
+  try{if(navigator.share){await navigator.share({title:'NUSA Program Sheet',url});return;}}catch(e){}
   try{await navigator.clipboard.writeText(url);alert('Share link copied to clipboard — anyone with it sees this sheet.');}
-  catch(e){window.prompt('Copy this share link (⌘/Ctrl+C):',url);}   // clipboard blocked → show it to copy manually
+  catch(e){window.prompt('Copy this share link (⌘/Ctrl+C):',url);}
 }
 
 let CURRENT_PAYLOAD=null;
+let CURRENT_GUESTS=[];
+let sheetEdited=false;
+document.querySelectorAll('.sheet').forEach(s=>s.addEventListener('input',()=>{sheetEdited=true;}));
 function decodePayload(enc){try{return JSON.parse(decodeURIComponent(escape(atob(enc))))}catch(e){return null}}
+
 function build(){
   const params=new URLSearchParams(location.search);
-  let payload=params.get('d')?decodePayload(params.get('d')):null;   // shared link takes priority
-  if(!payload){try{payload=JSON.parse(localStorage.getItem('toastflow_sheet')||'null')}catch(e){}}
-  const data=payload||{};CURRENT_PAYLOAD=payload;
-  const A=data.assignments||{};          // {role:{name,note}}
+  const isSnapshot=document.documentElement.dataset.snapshot==='1'||typeof ToastFlowMeetings==='undefined'||typeof ToastFlowPeople==='undefined'||typeof ToastFlowProgramme==='undefined';
+  if(isSnapshot&&!params.get('d')){
+    document.getElementById('src').textContent='· saved offline snapshot';
+    embedAllSheetImages();
+    return;
+  }
+  const urlDate=params.get('date')||'';
+  let payload=params.get('d')?decodePayload(params.get('d')):null;
+  if(!payload){
+    try{
+      const ls=JSON.parse(localStorage.getItem('toastflow_sheet')||'null');
+      if(ls&&(!urlDate||ls.date===urlDate))payload=ls;
+    }catch(e){}
+  }
+  if(!payload&&document.getElementById('agenda').children.length>0){
+    document.getElementById('src').textContent='· saved offline snapshot';
+    embedAllSheetImages();
+    return;
+  }
+  const data=payload||{};
+  CURRENT_PAYLOAD=payload;
+  CREDS=data.creds||[];
+  const A=data.assignments||{};
   const date=data.date||params.get('date')||'';
-  document.getElementById('src').textContent=payload?'· live data':'· blank template';
+  if(date)document.documentElement.dataset.date=date;
+  const meetingProg=ToastFlowMeetings.get(date);
+  const schedule=data.schedule||meetingProg.schedule;
+  CURRENT_GUESTS=Array.isArray(data.guests)?data.guests:(meetingProg.guests||[]);
 
-  // header date
+  document.getElementById('src').textContent=payload?'· saved programme snapshot':'· blank template';
+
+  // Header date
   const d=date?new Date(date):null;
   document.getElementById('agDate').textContent=d
     ? d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})
     : 'Friday, __ ______ 20__';
-  if(data.meta&&data.meta.venue)document.getElementById('venue').textContent=data.meta.venue;
 
-  // ExCo list
+  // Venue & Address
+  const venue=(data.meta&&data.meta.venue)||meetingProg.venue||'Classroom 3.1, SMU School of Computing and Information Systems 1';
+  document.getElementById('venue').textContent=venue;
+  const isSCIS2=date==='2026-08-14'||/Information Systems 2|School of Economics|\bSCIS\s*2\b/i.test(venue);
+  const defaultAddress=isSCIS2?'90 Stamford Rd, Singapore 178903':'80 Stamford Rd, Singapore 178902';
+  const defaultDirections=isSCIS2
+    ?'https://academy.smu.edu.sg/getting-smu/smu-school-economics-school-computing-information-systems-2'
+    :'https://academy.smu.edu.sg/getting-smu/smu-school-computing-and-information-systems-1';
+  const defaultMap=isSCIS2?'assets/location-map-scis2.png':'assets/location-map.png';
+  const address=data.meta?.address||meetingProg.address||defaultAddress;
+  document.getElementById('meetingAddress').textContent=address;
+
+  // Directions & Map (Page 2)
+  const directions=safeURL(data.meta?.directions||meetingProg.directions||defaultDirections);
+  const map=safeImgURL(data.meta?.map||meetingProg.map||defaultMap);
+  const dirEl=document.getElementById('locDirections');
+  if(dirEl){
+    if(directions){
+      dirEl.href=directions;
+      dirEl.textContent=directions;
+      dirEl.parentElement.style.display='';
+    } else {
+      dirEl.parentElement.style.display='none';
+    }
+  }
+  const mapEl=document.getElementById('locMap');
+  if(mapEl){
+    if(map){
+      mapEl.src=assetURL(map);
+      mapEl.style.display='';
+    } else {
+      mapEl.style.display='none';
+    }
+  }
+
+  // Voting QR codes & URLs (Page 2) — permanent Mentimeter QR codes
+  const defaultVoting=[
+    {image:'assets/menti-prepared.png'},
+    {image:'assets/menti-tabletopics.png'},
+    {image:'assets/menti-evaluator.png'}
+  ];
+  const qrIds=['mentiPrepared','mentiTopics','mentiEvaluator'];
+  const urlIds=['mentiPreparedUrl','mentiTopicsUrl','mentiEvaluatorUrl'];
+  const rawVoting=data.voting||meetingProg.voting||defaultVoting;
+  const votingList=(Array.isArray(rawVoting)&&rawVoting.length)?rawVoting:defaultVoting;
+  qrIds.forEach((id,i)=>{
+    const im=document.getElementById(id);
+    const urlDiv=document.getElementById(urlIds[i]);
+    const v=votingList[i]||defaultVoting[i]||{};
+    const src=safeImgURL(v.image)||defaultVoting[i].image;
+    const url=safeURL(v.url);
+    if(im){
+      im.src=assetURL(src);
+      im.hidden=false;
+      im.style.display='';
+    }
+    if(urlDiv){
+      if(url){
+        urlDiv.innerHTML=`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(url)}</a>`;
+        urlDiv.style.display='';
+      } else {
+        urlDiv.innerHTML='';
+        urlDiv.style.display='none';
+      }
+    }
+  });
+
+  // Draft Review note
+  const pending=Object.values(A).filter(a=>a.name&&a.confirmed!==true).length;
+  const hasAh=schedule.ah!==''&&!meetingProg.hideAhCounter;
+  const openRoles=ToastFlow.ROLES.filter(r=>r!=='General Evaluator'&&(hasAh||r!=='Ah-Counter')&&!A[r]?.name).length;
+  const noteEl=document.getElementById('reviewNote');
+  if(noteEl){
+    noteEl.textContent='DRAFT — '+pending+' tentative assignment(s), '+openRoles+' open role(s). Review projects, timings, venue and voting codes before publishing.';
+    noteEl.hidden=!!(data.final&&!pending&&!openRoles&&!data.scheduleTentative&&address&&address!=='To be confirmed'&&venue&&venue!=='Venue to be confirmed');
+  }
+
+  // Visiting Toastmasters list
+  const visitorList=[...(CURRENT_GUESTS||[])];
+  const seenVisitors=new Set(visitorList.map(p=>ToastFlowPeople.canonical(p.name)));
+  Object.values(A).forEach(a=>{
+    if(!a||!a.name||a.name==='TBC')return;
+    const p=ToastFlowPeople.find(a.name);
+    if(p&&p.visiting&&!seenVisitors.has(p.name)){
+      seenVisitors.add(p.name);
+      visitorList.push({name:p.name,credentials:p.credentials||'',club:p.club||''});
+    }
+  });
+  const visEl=document.getElementById('visitors');
+  if(visEl){
+    if(visitorList.length){
+      visEl.innerHTML='<div style="font-weight:bold;margin-bottom:2px">* Visiting Toastmasters</div>'+visitorList.map(p=>'<div>'+esc(p.name)+(p.club?' — '+esc(p.club):'')+'</div>').join('');
+      visEl.style.display='';
+    } else {
+      visEl.innerHTML='';
+      visEl.style.display='none';
+    }
+  }
+
+  // ExCo list & term
+  let termText='2026/ 2027';
+  if(date){
+    const yr=parseInt(date.slice(0,4),10);
+    const mo=parseInt(date.slice(5,7),10);
+    if(yr&&mo){
+      termText=mo>=7?`${yr}/ ${yr+1}`:`${yr-1}/ ${yr}`;
+    }
+  }
+  document.getElementById('excoTerm').textContent=data.term||termText;
   const exco=(data.exco&&data.exco.length?data.exco:DEFAULT_EXCO);
   document.getElementById('excoList').innerHTML=exco.map(([r,n])=>
-    `<div class="role">${esc(r)}</div><div class="name">${esc(n)||'&nbsp;'}</div>`).join('');
+    `<div class="role">${esc(r)}</div><div class="name">${n?withCred(n):'&nbsp;'}</div>`).join('');
   const excoName=r=>{const e=exco.find(x=>x[0].replace(/[+*()]/g,'').trim().toLowerCase()===r.toLowerCase());return e?e[1]:''};
-  const saa=(data.meta&&data.meta.saa)||excoName('Sergeant at Arms');
+  const saa=(data.meta&&data.meta.saa)||(A['Sergeant at Arms']||{}).name||'';
 
-  const nm=r=>{const x=A[r]||{};return x.name||''};
-  const note=r=>{const x=A[r]||{};return x.note||''};
+  const holder=r=>{const x=A[r]||{};return who(x.name)+(x.name&&x.name!=='TBC'&&x.confirmed!==true?' <span class="open">(TBC)</span>':'');};
 
-  // prepared-speech project list (numbered) + speakers, mirrored in evaluations
-  const speeches=[1,2,3,4].map(n=>{const x=A['Prepared Speech '+n]||{};return {name:x.name||'',proj:x.projectRaw||x.note||'',full:x.project||x.projectRaw||x.note||'',title:x.title||'',pathway:x.pathway||''};});
-  const spItems=speeches.map(s=>({proj:s.full?esc(s.full)+(s.title?` <span style="color:#666">— ${esc(s.title)}</span>`:''):'<span class="open">Pathways project —</span>',who:who(s.name)}));
-  const evItems=speeches.map((s,i)=>({proj:s.full?esc(s.full):'<span class="open">—</span>',who:who(nm('Speech Evaluator '+(i+1)))}));
+  // Speeches count (flexible 3 or 4)
+  const speechCount=data.meta?.speechSlots||data.speechSlots||(A['Prepared Speech 4']&&A['Prepared Speech 4'].name?4:(data.meta?.speechCount||4));
+  const count=Number(speechCount)===3?3:4;
+  const speeches=Array.from({length:count},(_,i)=>i+1).map(n=>{
+    const x=A['Prepared Speech '+n]||{};
+    return {name:x.name||'',proj:x.projectRaw||x.note||'',full:x.project||x.projectRaw||x.note||'',title:x.title||'',pathway:x.pathway||''};
+  });
+  const timing=s=>ToastFlowProgramme.lookup({...ToastFlowProgramme.objectives,...(data.objectives||{})},s.full)?.timing||'';
+  const spItems=speeches.map(s=>({
+    proj:s.full?esc(s.full)+(timing(s)?' ('+esc(timing(s))+')':' <span class="open">(timing TBC)</span>')+(s.title?` <span style="color:#666">— ${esc(s.title)}</span>`:''):(s.title?`<span style="color:#222;font-style:italic">“${esc(s.title)}”</span> <span class="open">(Project TBC)</span>`:'<span class="open">Pathways project —</span>'),
+    who:holder('Prepared Speech '+(speeches.indexOf(s)+1))
+  }));
+  const evItems=speeches.map((s,i)=>({
+    proj:s.full?esc(s.full):'<span class="open">—</span>',
+    who:holder('Speech Evaluator '+(i+1))
+  }));
 
-  // agenda rows — keep the club's 3-column Word structure (Time | Item | Person) WITH the
-  // vertical dividers. A "group" (grp-first/grp-mid/grp-last) drops only the horizontal lines
-  // between its rows, so each numbered project lines up with its speaker in the same row.
-  const A_ROWS=[];const push=(t,item,p,cls)=>A_ROWS.push({t,item,p,cls:cls||''});
-  push('7:30','Ice Breaker by SAA (1 min per pax)',who(saa));
-  push('7:40','Introduction by Toastmaster of the Evening',who(nm('Toastmaster of the Evening')));
-  push('7:45',"President's Opening Address",who(excoName('President')));
-  push('7:50','<b>Prepared Speeches</b> — Pathways Projects','','grp-first');
-  spItems.forEach((it,i)=>push('',`${i+1}. ${it.proj}`,it.who,'grp-mid'));
-  push('',"Timer’s Report",who(nm('Timer')),'grp-last');
-  push('8:45','Break &amp; Refreshments (15 min)','All');
-  push('9:00','Table Topics (15 min)',who(nm('Table Topics Master')),'grp-first');
-  push('',"Timer’s Report",who(nm('Timer')),'grp-last');
-  push('9:15','<b>Evaluations</b> (2-3 mins per pax)','','grp-first');
-  evItems.forEach((it,i)=>push('',`${i+1}. ${it.proj}`,it.who,'grp-mid'));
-  push('',"Timer’s Report",who(nm('Timer')),'grp-last');
-  push('9:30','Ah Counter Report (5min)',who(nm('Ah-Counter')));
-  push('9:35','Language Evaluation (10 min)',who(nm('Language Evaluator')));
-  push('9:45',"Awards Presentation &amp; President’s Closing Address",who(excoName('President')));
-  push('9:55','Meeting Adjourned','');
+  // Agenda Rows — replicates exact Word structure
+  const A_ROWS=[];
+  const push=(t,item,p,cls)=>A_ROWS.push({t,item,p,cls:cls||''});
+
+  push(schedule.saa,'Ice Breaker by SAA (1 min per pax)',A['Sergeant at Arms']?holder('Sergeant at Arms'):who(saa));
+  push(schedule.tme,'Introduction by Toastmaster of the Evening',holder('Toastmaster of the Evening'));
+  push(schedule.president,"President's Opening Address",who(excoName('President')));
+
+  // Pathways Projects Block
+  if(spItems.length>0){
+    push(schedule.speeches,
+      `<div class="ag-section-title">Pathways Projects</div><div>1. ${spItems[0].proj}</div>`,
+      spItems[0].who,
+      'grp-first');
+    for(let i=1;i<spItems.length;i++){
+      push('',`<div>${i+1}. ${spItems[i].proj}</div>`,spItems[i].who,'grp-mid');
+    }
+    push('','&nbsp;','&nbsp;','grp-mid ag-spacer');
+    push('',"Timer’s Report",holder('Timer'),'grp-last');
+  }
+
+  push(schedule.break,'Break &amp; Refreshments ('+schedule.breakMinutes+' min)','All');
+
+  // Table Topics Block
+  push(schedule.topics,'Table Topics ('+schedule.topicsMinutes+' min)',holder('Table Topics Master'),'grp-first');
+  push('',"Timer’s Report",holder('Timer'),'grp-last');
+
+  // Evaluations Block
+  if(evItems.length>0){
+    push(schedule.evaluations,
+      `<div style="margin-bottom:2px">Evaluations (2-3 mins per evaluator)</div><div>1. ${evItems[0].proj}</div>`,
+      evItems[0].who,
+      'grp-first');
+    for(let i=1;i<evItems.length;i++){
+      push('',`<div>${i+1}. ${evItems[i].proj}</div>`,evItems[i].who,'grp-mid');
+    }
+    push('','&nbsp;','&nbsp;','grp-mid ag-spacer');
+    push('',"Timer’s Report",holder('Timer'),'grp-last');
+  }
+
+  if(hasAh)push(schedule.ah,'Ah Counter Report (5 min)',holder('Ah-Counter'));
+  push(schedule.language,'Language Evaluation (10 min)',holder('Language Evaluator'));
+  push(schedule.awards,"Awards Presentation &amp; President’s Closing Address",who(excoName('President')));
+  push(schedule.end,'Meeting Adjourned','All');
+
   document.getElementById('agenda').innerHTML=A_ROWS.map(r=>
-    `<tr class="${r.cls}"><td class="col-t">${r.t}</td><td>${r.item}</td><td class="col-p who">${r.p}</td></tr>`).join('');
+    `<tr class="${r.cls}"><td class="col-t">${r.t}</td><td class="col-item">${r.item}</td><td class="col-p who">${r.p}</td></tr>`).join('');
 
-  // page 2 — project objectives (match speech projects to the catalogue if possible)
-  const cat=data.projects||[];
-  const pname=o=>String(o.name||o.project||'');
-  const findObj=title=>{
-    if(!title)return null;const t=title.toLowerCase();
-    return cat.find(o=>{const n=pname(o).toLowerCase();return n.length>4&&t.includes(n);})
-        || cat.find(o=>{const n=pname(o).toLowerCase();return n.length>4&&n.includes(t.replace(/^[a-z]{2,3}\s*l?\d?[^:]*:\s*/i,'').trim());});
-  };
-  // Objective is linked to the project (from the speech's chosen project) or, failing that,
-  // the speaker's current Pathway.
-  const objRows=speeches.filter(s=>s.name&&(s.proj||s.pathway)).map(s=>{
-    const o=findObj(s.proj)||findObj(s.pathway);
-    const label=s.full||s.proj||s.pathway;
-    return `<tr><td class="c1">${esc(label)}</td><td>${o&&o.objective?esc(o.objective):''}</td><td class="c3">${o&&o.timing?esc(o.timing):''}</td></tr>`});
+  // Page 2 Project Objectives
+  const OBJ={...ToastFlowProgramme.objectives,...(data.objectives||{})}, EVAL=data.evalForms||{};
+  const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+  const bareProject=ToastFlowProgramme.bare;
+  const indexBy=map=>{const o={};Object.keys(map).forEach(k=>{o[norm(k)]=map[k];});return o;};
+  const OBJi=indexBy(OBJ), EVALi=indexBy(EVAL);
+  const look=(full,raw,byNorm)=>{const bp=bareProject(full);if(!bp)return null;
+    return raw[bp]||byNorm[norm(bp)]||null;};
+  const objRows=speeches.filter(s=>s.name&&(s.full||s.title)).map(s=>{
+    const o=look(s.full,OBJ,OBJi)||{}, f=look(s.full,EVAL,EVALi);
+    const titleHtml=s.title?`<div style="font-style:italic;color:#444;font-size:12px;font-weight:normal;margin-top:2px">“${esc(s.title)}”</div>`:'';
+    const link=f&&f.url?`<div class="evallink"><a href="${esc(f.url)}" target="_blank" rel="noopener">⬇ Evaluation form</a></div>`:o.source?`<div class="evallink"><a href="${esc(o.source)}" target="_blank" rel="noopener">Project reference</a></div>`:'';
+    const projLabel=s.full?esc(s.full):'<span class="open">Pathways Project TBC</span>';
+    return `<tr><td class="c1">${projLabel}${titleHtml}${link}</td><td class="c2">${o.objective?esc(o.objective):'Full project objectives to be confirmed'}</td><td class="c3">${o.timing?esc(o.timing):'TBC'}</td></tr>`});
   document.getElementById('objectives').innerHTML=objRows.length?objRows.join('')
-    :'<tr><td class="c1 open">Prepared-speech projects</td><td class="open">Objectives appear here once speeches list their Pathways projects.</td><td class="c3"></td></tr>';
+    :'<tr><td class="c1 open">Prepared-speech projects</td><td class="c2 open">Objectives appear here once speeches list their Pathways projects.</td><td class="c3"></td></tr>';
+
+  embedAllSheetImages();
 }
 build();
 </script>

@@ -23,7 +23,7 @@
     {name:'Jai Ganesh Supra',credentials:'PI3',aliases:['Jai Ganesh Supra'],club:'Ace the Place CC',visiting:true,surnameReview:true},
     {name:'Sam LIM',credentials:'DTM',aliases:['Sam Lim'],club:'Lion City',visiting:true},
     {name:'Shelley CHOW',credentials:'VC1',aliases:['Shelley Chow'],club:'LCS',visiting:true},
-    {name:'Eugene LOW',credentials:'PI5',aliases:['Eugene Low'],club:'SRC'},
+    {name:'Eugene LOW',credentials:'PI5',aliases:['Eugene Low'],club:'SRC',visiting:true},
     {name:'Gordon YIT',credentials:'PM4',aliases:['Gordon Yit'],club:'NUS',visiting:true},
     {name:'Vincent CHEN',credentials:'SR3',aliases:['Vincent Chen'],club:'Tampines Changkat',visiting:true},
     {name:'Vincent CHUA',credentials:'DL5',aliases:['Vincent Chua'],club:'Cairnhill TMC',visiting:true},
@@ -38,13 +38,16 @@
     {name:'Eric TAN',credentials:'DTM',aliases:['Eric Tan'],club:'Toastmasters',visiting:true},
     {name:'Gary Ang Yee',credentials:'',aliases:['Gary Ang Yee'],club:'NTU Alumni',visiting:true},
     {name:'Benjamin ZHOU',credentials:'',aliases:['Benjamin Zhou'],club:'Anchorvale CC',visiting:true},
-    {name:'Benjamin ANG',credentials:'',aliases:['Benjamin Ang'],club:'NUSS',visiting:true},
+    {name:'Benjamin ANG',credentials:'PI3',aliases:['Benjamin Ang'],club:'NUSS',visiting:true},
     {name:'LIVIO',credentials:'',aliases:['Livio'],club:'Bukit Timah CC',visiting:true},
     {name:'Jun TAY',credentials:'PM5',aliases:['Jun Tay'],club:'ACCA',visiting:true},
     {name:'Suren Haris ANWAR',credentials:'PM2',aliases:['Suren Haris Anwar'],club:'Katong CC',visiting:true},
     {name:'Timothy LIN',credentials:'DTM',aliases:['Timothy Lin'],club:'Toastmasters',visiting:true},
-    {name:'Zhaoru LIN',credentials:'',aliases:['Zhaoru Lin'],club:'Lion Toastmasters',visiting:true,contact:'97779087'},
-    {name:'Shobha SINGH',credentials:'',aliases:['Shobha Singh'],club:'Mizuho TM',visiting:true,contact:'98377722'}
+    {name:'LIN Zhaoru',credentials:'DL4',aliases:['Zhaoru LIN','Zhaoru Lin','Lin Zhaoru'],club:'Lion Toastmasters',visiting:true,contact:'97779087'},
+    {name:'Shobha SINGH',credentials:'',aliases:['Shobha Singh'],club:'Mizuho TM',visiting:true,contact:'98377722'},
+    {name:'Emi CHUA',credentials:'EC5, PI4',aliases:['Emi Chua'],club:'',visiting:true},
+    {name:'CHAY Wen Liang',credentials:'DTM',aliases:['Chay Wen Liang'],club:'',visiting:true},
+    {name:'Isabelyn Esa',credentials:'PI5, DL4, EH3',aliases:['Isabelyn ESA'],club:'Competitive Speakers HK',visiting:true}
   ];
   const clean=s=>String(s||'').replace(/\([^)]*\)/g,'').replace(/[?*+]/g,'').replace(/,\s*(?:[A-Z]{2,5}\s*\d?|CL)\b.*$/i,'').replace(/\s+/g,' ').trim();
   const key=s=>clean(s).toLowerCase();

@@ -22,9 +22,9 @@ function renderProgrammeEditor(){
 async function saveMeetingProgramme(){
   const date=currentAdminDate(),p=ToastFlowMeetings.get(date),schedule={...p.schedule};
   try{
-    for(const input of document.querySelectorAll('[data-agenda]')){const value=input.value.trim();if(!/^(?:[1-9]|1[0-2]):[0-5]\d$/.test(value))throw new Error('Use a PM time such as 7:30');schedule[input.dataset.agenda]=value;}
+    for(const input of document.querySelectorAll('[data-agenda]')){const value=input.value.trim();if(input.dataset.agenda==='ah'&&!value){schedule.ah='';continue;}if(!/^(?:[1-9]|1[0-2]):[0-5]\d$/.test(value))throw new Error('Use a PM time such as 7:30');schedule[input.dataset.agenda]=value;}
     const toMin=t=>{const [h,m]=t.split(':').map(Number);return (h%12+12)*60+m;};
-    const keys=['saa','tme','president','speeches','break','topics','evaluations','ah','language','awards','end'];
+    const keys=['saa','tme','president','speeches','break','topics','evaluations','ah','language','awards','end'].filter(k=>k!=='ah'||schedule.ah);
     if(keys.some((k,i)=>i&&toMin(schedule[k])<=toMin(schedule[keys[i-1]])))throw new Error('Agenda times must be in increasing order');
     schedule.end24=String(Number(schedule.end.split(':')[0])%12+12).padStart(2,'0')+':'+schedule.end.split(':')[1];
     schedule.breakMinutes=Number(document.getElementById('programmeBreakMinutes').value);schedule.topicsMinutes=Number(document.getElementById('programmeTopicsMinutes').value);
